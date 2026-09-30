@@ -1,0 +1,1016 @@
+diff --git a/app/about/page.tsx b/app/about/page.tsx
+index e5ba271..1433ad4 100644
+--- a/app/about/page.tsx
++++ b/app/about/page.tsx
+@@ -5,7 +5,7 @@ import { profile, skillGroups } from "@/lib/portfolio-data";
+ 
+ export const metadata: Metadata = {
+   title: "About",
+-  description: "About the full-stack web developer and data science engineer behind the work.",
++  description: "About the full-stack developer and data/AI engineer behind the work.",
+ };
+ 
+ export default function AboutPage() {
+diff --git a/app/contact/page.tsx b/app/contact/page.tsx
+index 86849f3..33f003a 100644
+--- a/app/contact/page.tsx
++++ b/app/contact/page.tsx
+@@ -6,7 +6,7 @@ import { profile } from "@/lib/portfolio-data";
+ 
+ export const metadata: Metadata = {
+   title: "Contact",
+-  description: "Discuss a full-stack web development or data science project.",
++  description: "Discuss a full-stack development, data analytics, or machine-learning project.",
+ };
+ 
+ export default function ContactPage() {
+@@ -36,7 +36,7 @@ export default function ContactPage() {
+           </div>
+           <div className="template-reminder">
+             <strong>Before publishing</strong>
+-            <p>Replace the email and profile links in <code>lib/portfolio-data.ts</code>.</p>
++            <p>Replace the email, Upwork, and LinkedIn links in <code>lib/portfolio-data.ts</code>.</p>
+           </div>
+         </div>
+         <div>
+diff --git a/app/globals.css b/app/globals.css
+index a8f105f..5d8c111 100644
+--- a/app/globals.css
++++ b/app/globals.css
+@@ -450,142 +450,123 @@ button, input, textarea { font: inherit; }
+ 
+ .featured-project-meta span:first-child { color: var(--blue); }
+ 
+-.featured-project-screen {
+-  overflow: hidden;
++.featured-project-proof {
++  display: grid;
++  gap: 20px;
+   min-height: 306px;
+-  border: 1px solid #d4dce7;
++  padding: clamp(22px, 4vw, 34px);
++  border: 1px solid #cfd9e7;
+   border-radius: 10px;
+-  background: #f1f4f8;
++  background:
++    linear-gradient(rgba(36, 87, 214, 0.04) 1px, transparent 1px),
++    linear-gradient(90deg, rgba(36, 87, 214, 0.04) 1px, transparent 1px),
++    #f6f8fb;
++  background-size: 32px 32px;
+ }
+ 
+-.screen-toolbar {
++.featured-proof-heading {
+   display: flex;
+-  align-items: center;
+-  gap: 6px;
+-  height: 38px;
+-  padding: 0 13px;
+-  border-bottom: 1px solid #d4dce7;
+-  background: #ffffff;
++  align-items: flex-start;
++  justify-content: space-between;
++  gap: 18px;
+ }
+ 
+-.screen-toolbar > span {
+-  width: 6px;
+-  height: 6px;
+-  border-radius: 50%;
+-  background: #aeb8c6;
++.featured-proof-heading > div {
++  display: grid;
++  gap: 6px;
++  min-width: 0;
+ }
+ 
+-.screen-toolbar i {
+-  margin-left: auto;
+-  color: #7b8798;
++.featured-proof-heading span,
++.featured-scope > span {
++  color: #788599;
+   font-family: var(--font-mono);
+-  font-size: 0.62rem;
+-  font-style: normal;
++  font-size: 0.64rem;
++  font-weight: 750;
++  letter-spacing: 0.075em;
++  text-transform: uppercase;
+ }
+ 
+-.screen-layout {
+-  display: grid;
+-  grid-template-columns: 58px 1fr;
+-  min-height: 267px;
++.featured-proof-heading strong {
++  overflow: hidden;
++  color: #273344;
++  font-family: var(--font-mono);
++  font-size: 0.76rem;
++  text-overflow: ellipsis;
++  white-space: nowrap;
+ }
+ 
+-.screen-sidebar {
+-  display: grid;
+-  grid-template-rows: auto repeat(4, 22px);
+-  justify-items: center;
+-  align-content: start;
+-  gap: 14px;
+-  padding: 17px 11px;
+-  background: var(--charcoal);
++.featured-proof-status {
++  flex: 0 0 auto;
++  padding: 6px 9px;
++  border: 1px solid #c7d6fb;
++  border-radius: 999px;
++  background: #eaf0ff;
++  color: var(--blue-dark) !important;
+ }
+ 
+-.screen-sidebar strong {
++.featured-metric-grid {
+   display: grid;
+-  width: 29px;
+-  height: 29px;
+-  place-items: center;
+-  border-radius: 7px;
+-  background: var(--blue);
+-  color: #ffffff;
+-  font-family: var(--font-mono);
+-  font-size: 0.6rem;
+-}
+-
+-.screen-sidebar span {
+-  width: 22px;
+-  height: 5px;
+-  border-radius: 3px;
+-  background: rgba(255, 255, 255, 0.17);
++  grid-template-columns: repeat(3, minmax(0, 1fr));
++  gap: 9px;
+ }
+ 
+-.screen-main { padding: 20px; }
+-
+-.screen-heading {
+-  display: flex;
+-  align-items: center;
+-  justify-content: space-between;
+-  margin-bottom: 17px;
++.featured-metric-grid > div {
++  display: grid;
++  align-content: space-between;
++  min-height: 100px;
++  gap: 18px;
++  padding: 15px;
++  border: 1px solid #d4dce7;
++  border-radius: 8px;
++  background: rgba(255, 255, 255, 0.92);
+ }
+ 
+-.screen-heading span {
+-  width: 36%;
+-  height: 9px;
+-  border-radius: 3px;
+-  background: #59687a;
++.featured-metric-grid strong {
++  color: var(--blue-dark);
++  font-size: clamp(1.25rem, 2.2vw, 1.75rem);
++  letter-spacing: -0.04em;
+ }
+ 
+-.screen-heading i {
+-  width: 54px;
+-  height: 20px;
+-  border-radius: 5px;
+-  background: #dce6ff;
++.featured-metric-grid span {
++  color: #6e7b8d;
++  font-size: 0.66rem;
++  line-height: 1.4;
+ }
+ 
+-.screen-kpis {
++.featured-scope {
+   display: grid;
+-  grid-template-columns: repeat(3, 1fr);
+-  gap: 8px;
+-  margin-bottom: 17px;
++  gap: 11px;
+ }
+ 
+-.screen-kpis div {
++.featured-scope ol {
+   display: grid;
+-  gap: 5px;
+-  padding: 11px;
+-  border: 1px solid #d6dee8;
+-  border-radius: 7px;
+-  background: #ffffff;
+-}
+-
+-.screen-kpis span {
+-  color: #7b8798;
+-  font-size: 0.58rem;
+-}
+-
+-.screen-kpis strong {
+-  color: #273344;
+-  font-size: 0.86rem;
++  grid-template-columns: repeat(2, minmax(0, 1fr));
++  gap: 7px;
++  margin: 0;
++  padding: 0;
++  list-style: none;
+ }
+ 
+-.screen-chart {
++.featured-scope li {
+   display: flex;
+-  height: 116px;
+-  align-items: end;
+-  gap: 8px;
+-  padding: 18px 16px 0;
+-  border: 1px solid #d6dee8;
+-  border-radius: 7px;
+-  background:
+-    linear-gradient(#edf1f6 1px, transparent 1px),
+-    #ffffff;
+-  background-size: 100% 29px;
++  align-items: center;
++  gap: 9px;
++  color: #526176;
++  font-size: 0.73rem;
+ }
+ 
+-.screen-chart span {
+-  width: 100%;
+-  min-height: 12px;
+-  border-radius: 3px 3px 0 0;
+-  background: linear-gradient(180deg, #5d83e4, #2457d6);
++.featured-scope li span {
++  display: grid;
++  width: 23px;
++  height: 23px;
++  flex: 0 0 auto;
++  place-items: center;
++  border-radius: 5px;
++  background: var(--charcoal);
++  color: #ffffff;
++  font-family: var(--font-mono);
++  font-size: 0.56rem;
+ }
+ 
+ .featured-project-copy {
+@@ -652,6 +633,16 @@ button, input, textarea { font: inherit; }
+   font-weight: 750;
+ }
+ 
++.featured-project-actions {
++  display: flex;
++  flex-wrap: wrap;
++  justify-content: flex-end;
++  gap: 9px 18px;
++}
++
++.featured-project-actions a:last-child { color: #667386; }
++.featured-project-actions a:hover { color: var(--blue-dark); }
++
+ .marquee {
+   overflow: hidden;
+   border-block: 1px solid var(--line);
+@@ -760,76 +751,40 @@ button, input, textarea { font: inherit; }
+ .project-number { color: var(--project-accent); font-weight: 800; }
+ .project-label { color: #768396; }
+ 
+-.project-visual {
+-  overflow: hidden;
+-  height: 220px;
++.project-proof {
++  display: grid;
++  grid-template-columns: repeat(3, minmax(0, 1fr));
+   margin-bottom: 24px;
+-  padding: 15px;
+-  border: 1px solid #d9e0e8;
++  border: 1px solid #d2dae4;
+   border-radius: 9px;
+   background:
+-    radial-gradient(circle at 82% 5%, color-mix(in srgb, var(--project-accent) 15%, transparent), transparent 48%),
+-    #f0f3f7;
+-}
+-
+-.visual-header {
+-  display: flex;
+-  gap: 5px;
+-  height: 20px;
+-  border-bottom: 1px solid #d2dae4;
+-}
+-
+-.visual-header span {
+-  width: 5px;
+-  height: 5px;
+-  border-radius: 50%;
+-  background: #aab4c2;
++    radial-gradient(circle at 88% 0%, color-mix(in srgb, var(--project-accent) 13%, transparent), transparent 45%),
++    #f4f6f9;
+ }
+ 
+-.visual-content {
++.project-proof > div {
+   display: grid;
+-  grid-template-columns: 34px 1fr 50px;
+-  align-items: end;
+-  gap: 12px;
+-  height: calc(100% - 20px);
+-  padding-top: 16px;
+-}
+-
+-.visual-sidebar {
+-  height: 100%;
+-  border-radius: 5px;
+-  background: #273344;
+-}
+-
+-.visual-chart {
+-  display: flex;
+-  height: 100%;
+-  align-items: end;
+-  gap: 6px;
+-  padding-top: 28px;
+-  border-bottom: 1px solid #bdc7d4;
++  align-content: space-between;
++  min-width: 0;
++  min-height: 138px;
++  gap: 24px;
++  padding: 17px 14px;
++  border-right: 1px solid #d2dae4;
+ }
+ 
+-.visual-chart span {
+-  width: 100%;
+-  min-height: 12px;
+-  border-radius: 3px 3px 0 0;
+-  background: color-mix(in srgb, var(--project-accent) 78%, #e5ebf4);
+-  opacity: 0.9;
+-}
++.project-proof > div:last-child { border-right: 0; }
+ 
+-.visual-panel {
+-  display: grid;
+-  align-content: start;
+-  gap: 8px;
+-  height: 100%;
++.project-proof strong {
++  overflow-wrap: anywhere;
++  color: var(--project-accent);
++  font-size: clamp(1.1rem, 2vw, 1.45rem);
++  letter-spacing: -0.04em;
+ }
+ 
+-.visual-panel span {
+-  height: 34px;
+-  border: 1px solid #d2dae4;
+-  border-radius: 5px;
+-  background: rgba(255, 255, 255, 0.76);
++.project-proof span {
++  color: #68768a;
++  font-size: 0.66rem;
++  line-height: 1.45;
+ }
+ 
+ .project-category {
+@@ -887,6 +842,18 @@ button, input, textarea { font: inherit; }
+ 
+ .text-link:hover { color: var(--project-accent); }
+ 
++.project-card-links {
++  display: flex;
++  flex-wrap: wrap;
++  gap: 11px 18px;
++}
++
++.text-link-muted {
++  border-color: #c6cfdb;
++  color: #667386;
++  font-weight: 650;
++}
++
+ .section-button {
+   min-height: 44px;
+   margin-top: 28px;
+@@ -1072,6 +1039,18 @@ button, input, textarea { font: inherit; }
+   font-size: 0.88rem;
+ }
+ 
++.template-note > a {
++  flex: 0 0 auto;
++  margin-left: auto;
++  padding-bottom: 2px;
++  border-bottom: 1px solid #9ab1e9;
++  color: var(--blue-dark);
++  font-size: 0.82rem;
++  font-weight: 750;
++}
++
++.template-note > a:hover { color: var(--blue); }
++
+ .case-hero {
+   --project-accent: var(--blue);
+   padding-block: clamp(104px, 14vw, 180px) 76px;
+@@ -1148,7 +1127,12 @@ button, input, textarea { font: inherit; }
+   color: var(--blue);
+ }
+ 
+-.case-content aside [data-slot="button"] { border-radius: 8px; }
++.case-content aside [data-slot="button"] { width: 100%; border-radius: 8px; }
++
++.case-aside-actions {
++  display: grid;
++  gap: 9px;
++}
+ 
+ .case-story { display: grid; gap: 74px; }
+ 
+@@ -1604,9 +1588,10 @@ button, input, textarea { font: inherit; }
+   .hero-proof div:last-child { border-bottom: 0; }
+ 
+   .featured-project { padding: 13px; }
+-  .featured-project-screen { min-height: 280px; }
+-  .screen-layout { min-height: 241px; }
+-  .screen-main { padding: 15px; }
++  .featured-project-proof { min-height: auto; padding: 20px; }
++  .featured-metric-grid { grid-template-columns: 1fr; }
++  .featured-metric-grid > div { min-height: 82px; gap: 10px; }
++  .featured-scope ol { grid-template-columns: 1fr; }
+ 
+   .featured-project-copy {
+     grid-template-columns: 1fr;
+@@ -1614,6 +1599,7 @@ button, input, textarea { font: inherit; }
+   }
+ 
+   .featured-project-footer { align-items: flex-start; flex-direction: column; }
++  .featured-project-actions { justify-content: flex-start; }
+   .marquee { overflow-x: auto; }
+   .marquee div { justify-content: flex-start; }
+ 
+@@ -1634,8 +1620,6 @@ button, input, textarea { font: inherit; }
+     border-left: 0;
+   }
+ 
+-  .project-visual { height: 205px; }
+-
+   .service-list article {
+     grid-template-columns: 36px 1fr;
+     gap: 14px 20px;
+@@ -1673,6 +1657,7 @@ button, input, textarea { font: inherit; }
+   }
+ 
+   .template-note { display: grid; gap: 6px; }
++  .template-note > a { margin-left: 0; justify-self: start; }
+ 
+   .case-content {
+     grid-template-columns: 1fr;
+@@ -1698,10 +1683,15 @@ button, input, textarea { font: inherit; }
+ @media (max-width: 460px) {
+   .hero-actions { display: grid; }
+   .hero-actions [data-slot="button"] { width: 100%; }
+-  .screen-sidebar { display: none; }
+-  .screen-layout { grid-template-columns: 1fr; }
+-  .screen-kpis { grid-template-columns: 1fr 1fr; }
+-  .screen-kpis div:last-child { display: none; }
++  .featured-proof-heading { display: grid; }
++  .featured-proof-status { justify-self: start; }
++  .project-proof { grid-template-columns: 1fr; }
++  .project-proof > div {
++    min-height: 92px;
++    border-right: 0;
++    border-bottom: 1px solid #d2dae4;
++  }
++  .project-proof > div:last-child { border-bottom: 0; }
+   .footer-bottom { flex-direction: column; }
+ }
+ 
+diff --git a/app/layout.tsx b/app/layout.tsx
+index 0766a4b..aac5ddb 100644
+--- a/app/layout.tsx
++++ b/app/layout.tsx
+@@ -6,11 +6,11 @@ import "./globals.css";
+ 
+ export const metadata: Metadata = {
+   title: {
+-    default: `${profile.name} · Full-Stack & Data Engineer`,
++    default: `${profile.name} · Full-Stack & Data/AI Engineer`,
+     template: `%s · ${profile.name}`,
+   },
+   description:
+-    "Full-stack web development and data science engineering for useful, dependable digital products.",
++    "Full-stack development, data analytics, and machine-learning engineering for useful, dependable digital products.",
+   icons: {
+     icon: "/favicon.svg",
+     shortcut: "/favicon.svg",
+diff --git a/app/page.tsx b/app/page.tsx
+index 462c490..81f63e0 100644
+--- a/app/page.tsx
++++ b/app/page.tsx
+@@ -44,37 +44,29 @@ export default function Home() {
+             <span>Featured case study</span>
+             <span>{featuredProject.category}</span>
+           </div>
+-          <div className="featured-project-screen" aria-hidden="true">
+-            <div className="screen-toolbar">
+-              <span />
+-              <span />
+-              <span />
+-              <i>Operations overview</i>
+-            </div>
+-            <div className="screen-layout">
+-              <div className="screen-sidebar">
+-                <strong>OF</strong>
+-                <span />
+-                <span />
+-                <span />
+-                <span />
++          <div className="featured-project-proof">
++            <div className="featured-proof-heading">
++              <div>
++                <span>Repository-backed work</span>
++                <strong>{featuredProject.repositoryName}</strong>
+               </div>
+-              <div className="screen-main">
+-                <div className="screen-heading">
+-                  <span />
+-                  <i />
+-                </div>
+-                <div className="screen-kpis">
+-                  <div><span>Active work</span><strong>24</strong></div>
+-                  <div><span>On track</span><strong>91%</strong></div>
+-                  <div><span>Cycle time</span><strong>2.4d</strong></div>
+-                </div>
+-                <div className="screen-chart">
+-                  {[44, 62, 53, 76, 67, 88, 79, 94].map((height, index) => (
+-                    <span key={index} style={{ height: `${height}%` }} />
+-                  ))}
++              <span className="featured-proof-status">Public source</span>
++            </div>
++            <div className="featured-metric-grid">
++              {featuredProject.metrics.map((metric) => (
++                <div key={metric.label}>
++                  <strong>{metric.value}</strong>
++                  <span>{metric.label}</span>
+                 </div>
+-              </div>
++              ))}
++            </div>
++            <div className="featured-scope">
++              <span>Delivered scope</span>
++              <ol>
++                {featuredProject.services.map((service, index) => (
++                  <li key={service}><span>0{index + 1}</span>{service}</li>
++                ))}
++              </ol>
+             </div>
+           </div>
+           <div className="featured-project-copy">
+@@ -88,7 +80,12 @@ export default function Home() {
+             <ul>
+               {featuredProject.stack.slice(0, 3).map((item) => <li key={item}>{item}</li>)}
+             </ul>
+-            <Link href={`/projects/${featuredProject.slug}`}>View case study</Link>
++            <div className="featured-project-actions">
++              <Link href={`/projects/${featuredProject.slug}`}>View case study</Link>
++              {featuredProject.repositoryUrl ? (
++                <a href={featuredProject.repositoryUrl} target="_blank" rel="noreferrer">Source code</a>
++              ) : null}
++            </div>
+           </div>
+         </article>
+       </section>
+@@ -111,7 +108,7 @@ export default function Home() {
+             <p className="eyebrow">Selected work</p>
+             <h2>Useful software, seen from both sides.</h2>
+           </div>
+-          <p>Representative case-study templates showing how web engineering and data work can meet inside one coherent product.</p>
++          <p>Repository-backed applications alongside clearly labeled data-product concepts, with the decisions and engineering behind each one.</p>
+         </div>
+         <div className="project-grid">
+           {projects.slice(1, 4).map((project) => (
+diff --git a/app/projects/[slug]/page.tsx b/app/projects/[slug]/page.tsx
+index 7f5a208..86c5f77 100644
+--- a/app/projects/[slug]/page.tsx
++++ b/app/projects/[slug]/page.tsx
+@@ -45,10 +45,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
+         </div>
+       </section>
+ 
+-      <section className="shell template-note case-note" aria-label="Template notice">
+-        <strong>Demo case study</strong>
+-        <p>This structure is ready for your screenshots, process details, and verified results.</p>
+-      </section>
++      {project.kind === "concept" ? (
++        <section className="shell template-note case-note" aria-label="Concept project notice">
++          <strong>Concept case study</strong>
++          <p>This project demonstrates the proposed product and technical approach; it is not presented as a shipped client engagement.</p>
++        </section>
++      ) : null}
+ 
+       <section className="case-content shell">
+         <aside>
+@@ -58,9 +60,21 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
+               <li key={service}><Check aria-hidden="true" />{service}</li>
+             ))}
+           </ul>
+-          <Button asChild variant="outline">
+-            <Link href="/projects">All projects</Link>
+-          </Button>
++          <div className="case-aside-actions">
++            {project.repositoryUrl ? (
++              <Button asChild>
++                <a href={project.repositoryUrl} target="_blank" rel="noreferrer">View source code</a>
++              </Button>
++            ) : null}
++            {project.liveUrl ? (
++              <Button asChild>
++                <a href={project.liveUrl} target="_blank" rel="noreferrer">Open live app</a>
++              </Button>
++            ) : null}
++            <Button asChild variant="outline">
++              <Link href="/projects">All projects</Link>
++            </Button>
++          </div>
+         </aside>
+         <div className="case-story">
+           <article>
+diff --git a/app/projects/page.tsx b/app/projects/page.tsx
+index 85982e1..0092b2b 100644
+--- a/app/projects/page.tsx
++++ b/app/projects/page.tsx
+@@ -2,7 +2,7 @@ import type { Metadata } from "next";
+ import { ContactCta } from "@/components/contact-cta";
+ import { PageHero } from "@/components/page-hero";
+ import { ProjectCard } from "@/components/project-card";
+-import { projects } from "@/lib/portfolio-data";
++import { profile, projects } from "@/lib/portfolio-data";
+ 
+ export const metadata: Metadata = {
+   title: "Projects",
+@@ -14,12 +14,13 @@ export default function ProjectsPage() {
+     <main id="main-content">
+       <PageHero
+         eyebrow="Selected projects"
+-        title="Case studies built around real decisions."
+-        description="A project is more than its stack. These case-study templates show the problem, the reasoning, the system, and the result clients should expect to understand."
++        title="Products you can inspect, not just claims."
++        description="Explore two complete applications backed by public GitHub repositories, plus clearly labeled data-product concepts that show how I approach analytical work."
+       />
+-      <section className="shell template-note" aria-label="Template notice">
+-        <strong>Portfolio template</strong>
+-        <p>Replace these demo case studies with your verified projects and outcomes before publishing.</p>
++      <section className="shell template-note" aria-label="Public project notice">
++        <strong>Public work</strong>
++        <p>The first two projects link directly to their source code on GitHub.</p>
++        <a href={profile.githubUrl} target="_blank" rel="noreferrer">View GitHub profile</a>
+       </section>
+       <section className="section shell project-grid project-grid-wide">
+         {projects.map((project) => (
+diff --git a/components/project-card.tsx b/components/project-card.tsx
+index f012d17..8e56256 100644
+--- a/components/project-card.tsx
++++ b/components/project-card.tsx
+@@ -10,25 +10,13 @@ export function ProjectCard({ project }: { project: Project }) {
+         <span className="project-number">{project.number}</span>
+         <span className="project-label">{project.label}</span>
+       </div>
+-      <div className="project-visual" aria-hidden="true">
+-        <div className="visual-header">
+-          <span />
+-          <span />
+-          <span />
+-        </div>
+-        <div className="visual-content">
+-          <div className="visual-sidebar" />
+-          <div className="visual-chart">
+-            {[42, 70, 54, 88, 66, 92].map((height, index) => (
+-              <span key={index} style={{ height: `${height}%` }} />
+-            ))}
++      <div className="project-proof" aria-label={`${project.title} project facts`}>
++        {project.metrics.map((metric) => (
++          <div key={metric.label}>
++            <strong>{metric.value}</strong>
++            <span>{metric.label}</span>
+           </div>
+-          <div className="visual-panel">
+-            <span />
+-            <span />
+-            <span />
+-          </div>
+-        </div>
++        ))}
+       </div>
+       <p className="project-category">{project.category}</p>
+       <h2>{project.title}</h2>
+@@ -38,9 +26,21 @@ export function ProjectCard({ project }: { project: Project }) {
+           <li key={item}>{item}</li>
+         ))}
+       </ul>
+-      <Link className="text-link" href={`/projects/${project.slug}`}>
+-        View case study
+-      </Link>
++      <div className="project-card-links">
++        <Link className="text-link" href={`/projects/${project.slug}`}>
++          View case study
++        </Link>
++        {project.repositoryUrl ? (
++          <a className="text-link text-link-muted" href={project.repositoryUrl} target="_blank" rel="noreferrer">
++            Source code
++          </a>
++        ) : null}
++        {project.liveUrl ? (
++          <a className="text-link text-link-muted" href={project.liveUrl} target="_blank" rel="noreferrer">
++            Live demo
++          </a>
++        ) : null}
++      </div>
+     </article>
+   );
+ }
+diff --git a/components/site-footer.tsx b/components/site-footer.tsx
+index fc8d9b0..f1f4d10 100644
+--- a/components/site-footer.tsx
++++ b/components/site-footer.tsx
+@@ -20,7 +20,7 @@ export function SiteFooter() {
+ 
+         <div className="footer-links">
+           <span className="footer-label">Explore</span>
+-          {navItems.slice(1).map((item) => (
++          {navItems.filter((item) => !item.external).slice(1).map((item) => (
+             <Link key={item.href} href={item.href}>
+               {item.label}
+             </Link>
+@@ -30,7 +30,7 @@ export function SiteFooter() {
+         <div className="footer-links">
+           <span className="footer-label">Connect</span>
+           <Link href="/contact">Upwork</Link>
+-          <Link href="/contact">GitHub</Link>
++          <a href={profile.githubUrl} target="_blank" rel="noreferrer">GitHub</a>
+           <Link href="/contact">LinkedIn</Link>
+           <a href={`mailto:${profile.email}`}>Email</a>
+         </div>
+diff --git a/components/site-header.tsx b/components/site-header.tsx
+index 5cec965..ed2c1c2 100644
+--- a/components/site-header.tsx
++++ b/components/site-header.tsx
+@@ -18,11 +18,17 @@ export function SiteHeader() {
+         </Link>
+ 
+         <nav className="desktop-nav" aria-label="Primary navigation">
+-          {navItems.map((item) => (
+-            <Link key={item.href} href={item.href}>
+-              {item.label}
+-            </Link>
+-          ))}
++          {navItems.map((item) =>
++            item.external ? (
++              <a key={item.href} href={item.href} target="_blank" rel="noreferrer">
++                {item.label}
++              </a>
++            ) : (
++              <Link key={item.href} href={item.href}>
++                {item.label}
++              </Link>
++            ),
++          )}
+         </nav>
+ 
+         <Button asChild className="header-cta">
+@@ -34,11 +40,17 @@ export function SiteHeader() {
+             <Menu aria-hidden="true" />
+           </summary>
+           <nav aria-label="Mobile navigation">
+-            {navItems.map((item) => (
+-              <Link key={item.href} href={item.href}>
+-                {item.label}
+-              </Link>
+-            ))}
++            {navItems.map((item) =>
++              item.external ? (
++                <a key={item.href} href={item.href} target="_blank" rel="noreferrer">
++                  {item.label}
++                </a>
++              ) : (
++                <Link key={item.href} href={item.href}>
++                  {item.label}
++                </Link>
++              ),
++            )}
+           </nav>
+         </details>
+       </div>
+diff --git a/lib/portfolio-data.ts b/lib/portfolio-data.ts
+index 7bda031..e7280e0 100644
+--- a/lib/portfolio-data.ts
++++ b/lib/portfolio-data.ts
+@@ -4,7 +4,7 @@
+ export const profile = {
+   name: "YOUR NAME",
+   initials: "YN",
+-  role: "Full-Stack Web Developer & Data Science Engineer",
++  role: "Full-Stack Developer & Data/AI Engineer",
+   location: "Indonesia · Available worldwide",
+   availability: "Open for selected freelance projects",
+   email: "hello@yourname.dev",
+@@ -13,94 +13,127 @@ export const profile = {
+   shortBio:
+     "An independent engineer focused on useful software, clear communication, and solutions that remain maintainable after launch.",
+   upworkUrl: "#replace-with-your-upwork-profile",
+-  githubUrl: "#replace-with-your-github-profile",
++  githubUrl: "https://github.com/JackButler99",
+   linkedinUrl: "#replace-with-your-linkedin-profile",
+ };
+ 
+ export const navItems = [
+-  { href: "/", label: "Home" },
+-  { href: "/projects", label: "Projects" },
+-  { href: "/services", label: "Services" },
+-  { href: "/about", label: "About" },
+-  { href: "/contact", label: "Contact" },
++  { href: "/", label: "Home", external: false },
++  { href: "/projects", label: "Projects", external: false },
++  { href: "/services", label: "Services", external: false },
++  { href: "/about", label: "About", external: false },
++  { href: "/contact", label: "Contact", external: false },
++  { href: profile.githubUrl, label: "GitHub", external: true },
+ ];
+ 
+-export const projects = [
++export type PortfolioProject = {
++  slug: string;
++  number: string;
++  title: string;
++  category: string;
++  label: string;
++  summary: string;
++  challenge: string;
++  solution: string;
++  outcome: string;
++  metrics: Array<{ value: string; label: string }>;
++  stack: string[];
++  services: string[];
++  accent: string;
++  kind: "repository" | "concept";
++  repositoryName: string | null;
++  repositoryUrl: string | null;
++  liveUrl: string | null;
++};
++
++export const projects: PortfolioProject[] = [
+   {
+-    slug: "opsflow-platform",
++    slug: "ular-tangga-v2",
+     number: "01",
+-    title: "OpsFlow Platform",
+-    category: "Full-stack product",
+-    label: "Demo case study",
++    title: "Jarak & Dadu",
++    category: "Multiplayer web application",
++    label: "Public GitHub project",
+     summary:
+-      "A focused operations workspace that replaces scattered spreadsheets with live workflows, permissions, and decision-ready reporting.",
++      "A room-based snakes-and-ladders experience for long-distance couples, combining shared turns, animated play, and conversation challenges.",
+     challenge:
+-      "An operations team works across disconnected tools, making ownership unclear and weekly reporting slow. The product needs to unify day-to-day work without creating another heavy system.",
++      "Long-distance couples need a lightweight shared activity that feels more personal than another video call. The experience has to stay synchronized across two devices while remaining simple enough to start with only a room code.",
+     solution:
+-      "A role-aware web application with a fast task workspace, audit-friendly activity history, and dashboards driven by a clean API and relational data model.",
++      "I built a two-player Next.js game with room creation and joining, protected player turns, animated board movement, relationship prompts, and persistent PostgreSQL room state managed through Drizzle ORM.",
+     outcome:
+-      "Use this section for verified results after launch—for example, reporting time saved, adoption, or fewer handoff errors.",
++      "The repository contains a complete responsive game flow—from lobby and room sharing through challenges, win celebration, and rematch—with server-side validation for every move.",
+     metrics: [
+-      { value: "3", label: "Role-based workspaces" },
+-      { value: "1", label: "Shared source of truth" },
+-      { value: "Live", label: "Operational reporting" },
++      { value: "100", label: "Interactive board cells" },
++      { value: "2", label: "Players in each room" },
++      { value: "Postgres", label: "Persistent room state" },
+     ],
+-    stack: ["Next.js", "TypeScript", "PostgreSQL", "REST API", "Docker"],
+-    services: ["Product architecture", "Frontend development", "Backend & database", "Deployment"],
++    stack: ["Next.js", "TypeScript", "PostgreSQL", "Drizzle ORM", "Tailwind CSS"],
++    services: ["Product design", "Responsive frontend", "Game-state API", "Database architecture"],
+     accent: "lime",
++    kind: "repository",
++    repositoryName: "JackButler99/ular-tangga-v2",
++    repositoryUrl: "https://github.com/JackButler99/ular-tangga-v2",
++    liveUrl: null,
+   },
+   {
+-    slug: "signallens-analytics",
++    slug: "learn-toefl",
+     number: "02",
+-    title: "SignalLens Analytics",
+-    category: "Data product",
+-    label: "Demo case study",
++    title: "ITP Practice Lab",
++    category: "Full-stack learning platform",
++    label: "Public GitHub project",
+     summary:
+-      "A customer-health analytics product that turns raw behavioral data into explainable risk signals and practical next actions.",
++      "An independent TOEFL ITP practice platform with secure accounts, focused practice sessions, a timed full simulation, progress history, and answer review.",
+     challenge:
+-      "Customer teams have plenty of usage data but no dependable way to identify accounts needing attention. A useful solution must be accurate, interpretable, and simple to act on.",
++      "Independent learners need more than a static question list: they need realistic section timing, saved progress, clear explanations, and an honest distinction between practice results and official TOEFL scoring.",
+     solution:
+-      "A reproducible Python pipeline for feature preparation and model evaluation, paired with a web dashboard that explains risk drivers instead of showing a black-box score.",
++      "I developed a full-stack Next.js application with original question content, section-specific practice, a server-enforced 115-minute simulation, SQLite persistence, scrypt password hashing, HttpOnly sessions, and post-test review.",
+     outcome:
+-      "Replace this copy with validated model performance and the real business decision improved by the product.",
++      "The result is a runnable end-to-end learning product covering registration, practice, simulation, autosaved answers, progress history, section summaries, and detailed explanations.",
+     metrics: [
+-      { value: "01", label: "Explainable risk score" },
+-      { value: "24h", label: "Pipeline refresh target" },
+-      { value: "A/B", label: "Model comparison" },
++      { value: "140", label: "Original practice questions" },
++      { value: "3", label: "Test sections" },
++      { value: "115m", label: "Full simulation" },
+     ],
+-    stack: ["Python", "Pandas", "scikit-learn", "FastAPI", "Next.js"],
+-    services: ["Data exploration", "Model development", "API integration", "Analytics UI"],
++    stack: ["Next.js", "TypeScript", "SQLite", "Node.js", "Web Speech API"],
++    services: ["Product architecture", "Authentication", "Assessment workflow", "Persistent progress"],
+     accent: "cyan",
++    kind: "repository",
++    repositoryName: "JackButler99/LearnToefl",
++    repositoryUrl: "https://github.com/JackButler99/LearnToefl",
++    liveUrl: null,
+   },
+   {
+-    slug: "ledgerly-saas",
++    slug: "signallens-analytics",
+     number: "03",
+-    title: "Ledgerly SaaS",
+-    category: "SaaS application",
+-    label: "Demo case study",
++    title: "SignalLens Analytics",
++    category: "Data product concept",
++    label: "Concept case study",
+     summary:
+-      "A clean subscription-finance workspace built around predictable workflows, trustworthy calculations, and quick monthly review.",
++      "A customer-health analytics concept that turns behavioral data into explainable risk signals and practical next actions.",
+     challenge:
+-      "A small finance team needs a simpler way to reconcile recurring revenue and understand movement between periods without maintaining fragile spreadsheet formulas.",
++      "Customer teams can have plenty of usage data but no dependable way to identify accounts needing attention. A useful solution must be accurate, interpretable, and simple to act on.",
+     solution:
+-      "A multi-tenant SaaS application with secure account boundaries, import validation, reconciliation workflows, and accessible financial summaries.",
++      "A proposed Python pipeline for feature preparation and model evaluation, paired with a web dashboard that explains risk drivers instead of showing a black-box score.",
+     outcome:
+-      "Add verified product outcomes here: processing time, error reduction, active teams, or successful reconciliations.",
++      "This concept is ready to be developed against a real dataset and validated with measurable model performance and a clearly defined customer-success decision.",
+     metrics: [
+-      { value: "CSV", label: "Validated imports" },
+-      { value: "RBAC", label: "Account permissions" },
+-      { value: "MRR", label: "Movement reporting" },
++      { value: "01", label: "Explainable risk score" },
++      { value: "24h", label: "Pipeline refresh target" },
++      { value: "A/B", label: "Model comparison" },
+     ],
+-    stack: ["React", "Node.js", "PostgreSQL", "Auth", "Cloud hosting"],
+-    services: ["SaaS architecture", "Design system", "Secure authentication", "QA & launch"],
++    stack: ["Python", "Pandas", "scikit-learn", "FastAPI", "Next.js"],
++    services: ["Data exploration", "Model development", "API integration", "Analytics UI"],
+     accent: "violet",
++    kind: "concept",
++    repositoryName: null,
++    repositoryUrl: null,
++    liveUrl: null,
+   },
+   {
+     slug: "demandcast-forecasting",
+     number: "04",
+     title: "DemandCast",
+     category: "Forecasting system",
+-    label: "Demo case study",
++    label: "Concept case study",
+     summary:
+       "A forecasting workflow that helps a retail team compare demand scenarios, monitor model drift, and plan with clearer uncertainty.",
+     challenge:
+@@ -108,7 +141,7 @@ export const projects = [
+     solution:
+       "A time-series evaluation pipeline with backtesting, baseline comparison, and a lightweight planning interface for reviewing forecasts by product and region.",
+     outcome:
+-      "Replace with the real forecast horizon, error improvement, and planning decision supported by your project.",
++      "This concept is ready to be implemented with a real retail dataset, then evaluated against a documented baseline, forecast horizon, and planning decision.",
+     metrics: [
+       { value: "MAPE", label: "Tracked by segment" },
+       { value: "3", label: "Forecast scenarios" },
+@@ -117,6 +150,10 @@ export const projects = [
+     stack: ["Python", "SQL", "Time series", "FastAPI", "React"],
+     services: ["Data cleaning", "Forecast evaluation", "API development", "Decision interface"],
+     accent: "orange",
++    kind: "concept",
++    repositoryName: null,
++    repositoryUrl: null,
++    liveUrl: null,
+   },
+ ];
+ 
