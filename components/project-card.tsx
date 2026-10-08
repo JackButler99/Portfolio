@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { projects } from "@/lib/portfolio-data";
+import { projects } from "@/lib/portfolio-projects";
 
 type Project = (typeof projects)[number];
 
@@ -10,25 +10,13 @@ export function ProjectCard({ project }: { project: Project }) {
         <span className="project-number">{project.number}</span>
         <span className="project-label">{project.label}</span>
       </div>
-      <div className="project-visual" aria-hidden="true">
-        <div className="visual-header">
-          <span />
-          <span />
-          <span />
-        </div>
-        <div className="visual-content">
-          <div className="visual-sidebar" />
-          <div className="visual-chart">
-            {[42, 70, 54, 88, 66, 92].map((height, index) => (
-              <span key={index} style={{ height: `${height}%` }} />
-            ))}
+      <div className="project-proof" aria-label={`${project.title} project facts`}>
+        {project.metrics.map((metric) => (
+          <div key={metric.label}>
+            <strong>{metric.value}</strong>
+            <span>{metric.label}</span>
           </div>
-          <div className="visual-panel">
-            <span />
-            <span />
-            <span />
-          </div>
-        </div>
+        ))}
       </div>
       <p className="project-category">{project.category}</p>
       <h2>{project.title}</h2>
@@ -38,9 +26,21 @@ export function ProjectCard({ project }: { project: Project }) {
           <li key={item}>{item}</li>
         ))}
       </ul>
-      <Link className="text-link" href={`/projects/${project.slug}`}>
-        View case study
-      </Link>
+      <div className="project-card-links">
+        <Link className="text-link" href={`/projects/${project.slug}`}>
+          View case study
+        </Link>
+        {project.repositoryUrl ? (
+          <a className="text-link text-link-muted" href={project.repositoryUrl} target="_blank" rel="noreferrer">
+            Source code
+          </a>
+        ) : null}
+        {project.liveUrl ? (
+          <a className="text-link text-link-muted" href={project.liveUrl} target="_blank" rel="noreferrer">
+            Live demo
+          </a>
+        ) : null}
+      </div>
     </article>
   );
 }

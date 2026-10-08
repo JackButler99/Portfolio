@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ContactCta } from "@/components/contact-cta";
 import { PageHero } from "@/components/page-hero";
 import { ProjectCard } from "@/components/project-card";
-import { projects } from "@/lib/portfolio-data";
+import { profile, projects } from "@/lib/portfolio-projects";
 
 export const metadata: Metadata = {
   title: "Projects",
@@ -14,12 +14,13 @@ export default function ProjectsPage() {
     <main id="main-content">
       <PageHero
         eyebrow="Selected projects"
-        title="Case studies built around real decisions."
-        description="A project is more than its stack. These case-study templates show the problem, the reasoning, the system, and the result clients should expect to understand."
+        title="Products you can inspect, not just claims."
+        description="Explore two complete applications backed by public GitHub repositories, plus clearly labeled data-product concepts that show how I approach analytical work."
       />
-      <section className="shell template-note" aria-label="Template notice">
-        <strong>Portfolio template</strong>
-        <p>Replace these demo case studies with your verified projects and outcomes before publishing.</p>
+      <section className="shell template-note" aria-label="Public project notice">
+        <strong>Live work</strong>
+        <p>The first two projects are live—you can try each app, inspect its source, and read the complete case study.</p>
+        <a href={profile.githubUrl} target="_blank" rel="noreferrer">View GitHub profile</a>
       </section>
       <section className="section shell project-grid project-grid-wide">
         {projects.map((project) => (

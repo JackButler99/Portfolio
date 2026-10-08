@@ -20,7 +20,7 @@ export function SiteFooter() {
 
         <div className="footer-links">
           <span className="footer-label">Explore</span>
-          {navItems.slice(1).map((item) => (
+          {navItems.filter((item) => !item.external).slice(1).map((item) => (
             <Link key={item.href} href={item.href}>
               {item.label}
             </Link>
@@ -29,8 +29,8 @@ export function SiteFooter() {
 
         <div className="footer-links">
           <span className="footer-label">Connect</span>
-          <Link href="/contact">Upwork</Link>
-          <Link href="/contact">GitHub</Link>
+          <a href={profile.upworkUrl} target="_blank" rel="noreferrer">Upwork</a>
+          <a href={profile.githubUrl} target="_blank" rel="noreferrer">GitHub</a>
           <Link href="/contact">LinkedIn</Link>
           <a href={`mailto:${profile.email}`}>Email</a>
         </div>

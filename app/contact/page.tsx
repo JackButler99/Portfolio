@@ -6,7 +6,7 @@ import { profile } from "@/lib/portfolio-data";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Discuss a full-stack web development or data science project.",
+  description: "Discuss a full-stack development, data analytics, or machine-learning project.",
 };
 
 export default function ContactPage() {
@@ -36,7 +36,7 @@ export default function ContactPage() {
           </div>
           <div className="template-reminder">
             <strong>Before publishing</strong>
-            <p>Replace the email and profile links in <code>lib/portfolio-data.ts</code>.</p>
+            <p>Add your LinkedIn profile in <code>lib/portfolio-data.ts</code> when it is ready.</p>
           </div>
         </div>
         <div>

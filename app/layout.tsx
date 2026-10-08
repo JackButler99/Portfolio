@@ -6,11 +6,11 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: `${profile.name} · Full-Stack & Data Engineer`,
+    default: `${profile.name} · Full-Stack & Data/AI Engineer`,
     template: `%s · ${profile.name}`,
   },
   description:
-    "Full-stack web development and data science engineering for useful, dependable digital products.",
+    "Full-stack development, data analytics, and machine-learning engineering for useful, dependable digital products.",
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",

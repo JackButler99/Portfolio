@@ -5,7 +5,7 @@ import { profile, skillGroups } from "@/lib/portfolio-data";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "About the full-stack web developer and data science engineer behind the work.",
+  description: "About the full-stack developer and data/AI engineer behind the work.",
 };
 
 export default function AboutPage() {

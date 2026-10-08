@@ -4,7 +4,7 @@
 export const profile = {
   name: "Ridho Kurniawan",
   initials: "RK",
-  role: "Full-Stack Web Developer & Data Science Engineer",
+  role: "Full-Stack Developer & Data/AI Engineer",
   location: "Indonesia · Available worldwide",
   availability: "Open for freelance projects",
   email: "ridhokurniawan32@gmail.com",
@@ -18,51 +18,225 @@ export const profile = {
 };
 
 export const navItems = [
-  { href: "/", label: "Home" },
-  { href: "/projects", label: "Projects" },
-  { href: "/services", label: "Services" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
+  { href: "/", label: "Home", external: false },
+  { href: "/projects", label: "Projects", external: false },
+  { href: "/services", label: "Services", external: false },
+  { href: "/about", label: "About", external: false },
+  { href: "/contact", label: "Contact", external: false },
+  { href: profile.githubUrl, label: "GitHub", external: true },
 ];
 
-export const projects = [
+export type ProjectCaseStudy = {
+  overview: Array<{ label: string; value: string }>;
+  highlights: Array<{ number: string; title: string; text: string }>;
+  decisions: Array<{ title: string; text: string }>;
+  validation: string[];
+  nextSteps: string[];
+};
+
+export type PortfolioProject = {
+  slug: string;
+  number: string;
+  title: string;
+  shortTitle?: string;
+  category: string;
+  label: string;
+  summary: string;
+  challenge: string;
+  solution: string;
+  outcome: string;
+  metrics: Array<{ value: string; label: string }>;
+  stack: string[];
+  services: string[];
+  accent: "lime" | "cyan" | "violet" | "orange";
+  kind: "repository" | "concept";
+  repositoryName: string | null;
+  repositoryUrl: string | null;
+  liveUrl: string | null;
+  image?: string;
+  imageAlt?: string;
+  caseStudy?: ProjectCaseStudy;
+};
+
+export const projects: PortfolioProject[] = [
   {
-    slug: "opsflow-platform",
+    slug: "ular-tangga-v2",
     number: "01",
-    title: "OpsFlow Platform",
-    category: "Full-stack product",
-    label: "Demo case study",
+    title: "Main Berdua",
+    shortTitle: "Main Berdua",
+    category: "Multiplayer game platform",
+    label: "Live independent product",
     summary:
-      "A focused operations workspace that replaces scattered spreadsheets with live workflows, permissions, and decision-ready reporting.",
+      "Main Berdua is a private, browser-based game platform for couples. Two players enter a shared room with a nickname and room code, then choose from five games ranging from quick hidden-answer prompts to a cooperative maze. The platform reuses the same room, player, and chat system while each game keeps its own rules and interface.",
     challenge:
-      "An operations team works across disconnected tools, making ownership unclear and weekly reporting slow. The product needs to unify day-to-day work without creating another heavy system.",
+      "The project began as a single snakes-and-ladders game. Turning it into a five-game platform introduced a larger engineering problem: every game needed different rules and state, but players should not have to relearn how to create a room, invite a partner, chat, or continue a session.\n\nSome games also depend on hidden information. One player’s answer must remain private until both players submit. Turn-based games must keep two browsers on the same room state, while the cooperative maze must track movement, resources, and shared progress.",
     solution:
-      "A role-aware web application with a fast task workspace, audit-friendly activity history, and dashboards driven by a clean API and relational data model.",
+      "I separated the shared multiplayer system from the individual game engines.\n\nNext.js handles the interface and server-side operations. A common platform layer manages rooms, players, chat, game selection, and session status. Each game module owns its own rules, state transitions, and UI.\n\nDrizzle maps the data model to Neon Postgres. Stable data such as room identity, players, messages, turns, and status uses relational columns. Game-specific state is stored as JSONB because the board game, quizzes, streak game, and maze require different data structures.",
     outcome:
-      "Use this section for verified results after launch—for example, reporting time saved, adoption, or fewer handoff errors.",
+      "The production application now supports five playable experiences through one room flow. A new game can reuse the existing room, player, chat, and deployment infrastructure instead of rebuilding those concerns from the beginning.\n\nThe application is deployed on Vercel with Neon Postgres. A production smoke test successfully created a room, loaded the game board, and confirmed that its data remained available after a full page reload.",
     metrics: [
-      { value: "3", label: "Role-based workspaces" },
-      { value: "1", label: "Shared source of truth" },
-      { value: "Live", label: "Operational reporting" },
+      { value: "5", label: "Playable game modes" },
+      { value: "2", label: "Players in each room" },
+      { value: "0", label: "Accounts required" },
     ],
-    stack: ["Next.js", "TypeScript", "PostgreSQL", "REST API", "Docker"],
-    services: ["Product architecture", "Frontend development", "Backend & database", "Deployment"],
+    stack: ["Next.js", "TypeScript", "Neon Postgres", "Drizzle ORM", "Tailwind CSS", "Vitest"],
+    services: ["Product architecture", "Multi-game UX", "State synchronization", "Database & deployment"],
     accent: "lime",
+    kind: "repository",
+    repositoryName: "JackButler99/ular-tangga-v2",
+    repositoryUrl: "https://github.com/JackButler99/ular-tangga-v2",
+    liveUrl: "https://ular-tangga-v2.vercel.app/",
+    image: "/projects/ular-tangga-v2-landing.jpg",
+    imageAlt: "Main Berdua catalog showing five games for couples",
+    caseStudy: {
+      overview: [
+        { label: "Product", value: "Private two-player game platform" },
+        { label: "Role", value: "Product design, system architecture, and full-stack engineering" },
+        { label: "Delivery", value: "Independent product deployed on Vercel" },
+      ],
+      highlights: [
+        {
+          number: "01",
+          title: "Private rooms without user accounts",
+          text: "A host chooses a game, enters a nickname, and receives a room code to share. The second player joins from another browser without creating an account. Both clients connect to the same room record and persisted game session.",
+        },
+        {
+          number: "02",
+          title: "Five games on one shared platform",
+          text: "The catalog includes a story-led board game, two hidden-answer couple quizzes, a choice-and-streak game, and a cooperative 7×7 maze. A game registry connects each catalog entry to an isolated game module, while room and chat behavior stays shared.",
+        },
+        {
+          number: "03",
+          title: "Mechanics designed for two players",
+          text: "Hidden-answer games store each submission separately and reveal the result only when both players are ready. Turn-based games persist the active player and current state. The maze adds shared resources, protective abilities, and cooperative progress without requiring a separate multiplayer foundation.",
+        },
+      ],
+      decisions: [
+        {
+          title: "Separate platform responsibilities from game rules",
+          text: "Room creation, joining, chat, reusable UI, and the game registry belong to the shared platform. Rules and state transitions stay inside each game module. This limits coupling and makes individual games easier to change.",
+        },
+        {
+          title: "Combine relational data with flexible game state",
+          text: "Rooms, players, turns, and messages have predictable structures, so they use relational fields. JSONB stores the parts that vary between games. This avoids forcing five different rule systems into one rigid schema.",
+        },
+        {
+          title: "Use server-backed state without mandatory accounts",
+          text: "A room code and player identity provide enough context for a short private session. Removing account creation reduces onboarding friction, while the server still keeps both players connected to the same persisted state.",
+        },
+        {
+          title: "Test reusable game behavior",
+          text: "Vitest covers shared configurable question-selection behavior. TypeScript and production builds catch integration problems across the platform and individual game modules.",
+        },
+      ],
+      validation: [
+        "Verified the five game entries and their room-onboarding flows in the deployed application.",
+        "Created a production room and confirmed that its state survived a browser reload.",
+        "Ran TypeScript, lint, production-build, and targeted Vitest checks before deployment.",
+      ],
+      nextSteps: [
+        "Measure room creation, successful joins, game completion, and reconnect failures for each game.",
+        "Add clearer room-expiration and reconnection behavior for interrupted sessions.",
+        "Audit keyboard navigation, focus states, motion, and screen-reader behavior across every game.",
+      ],
+    },
+  },
+  {
+    slug: "learn-toefl",
+    number: "02",
+    title: "ITP Practice Lab",
+    shortTitle: "ITP Practice",
+    category: "Full-stack learning platform",
+    label: "Live independent product",
+    summary:
+      "An independent TOEFL ITP practice platform with secure accounts, focused practice sessions, a timed full simulation, progress history, and answer review.",
+    challenge:
+      "Independent learners need more than a static question list: they need realistic section timing, saved progress, clear explanations, and an honest distinction between practice results and official TOEFL scoring.",
+    solution:
+      "I developed a full-stack Next.js application with original question content, section-specific practice, a server-enforced 115-minute simulation, Neon/PostgreSQL persistence, scrypt password hashing, HttpOnly sessions, and post-test review.",
+    outcome:
+      "The deployed product covers registration, focused practice, full simulation, autosaved answers, progress history, section summaries, and detailed explanations. A production smoke test confirmed that an answer remained selected after a full page reload.",
+    metrics: [
+      { value: "140", label: "Original practice questions" },
+      { value: "3", label: "Test sections" },
+      { value: "115m", label: "Full simulation" },
+    ],
+    stack: ["Next.js", "TypeScript", "Neon Postgres", "Node.js", "Web Speech API"],
+    services: ["Product architecture", "Secure authentication", "Assessment workflow", "Data migration & deployment"],
+    accent: "cyan",
+    kind: "repository",
+    repositoryName: "JackButler99/LearnToefl",
+    repositoryUrl: "https://github.com/JackButler99/LearnToefl",
+    liveUrl: "https://learn-toefl.vercel.app/",
+    image: "/projects/learn-toefl-landing.jpg",
+    imageAlt: "ITP Practice Lab landing page showing its 140-question study experience",
+    caseStudy: {
+      overview: [
+        { label: "Product", value: "Independent TOEFL ITP practice platform" },
+        { label: "My role", value: "Product design, content, and full-stack engineering" },
+        { label: "Delivery", value: "Next.js and Neon, live on Vercel" },
+      ],
+      highlights: [
+        {
+          number: "01",
+          title: "Practice for focus, simulation for rhythm",
+          text: "Learners can choose a short untimed set for one section or complete all 140 questions through separately timed Listening, Structure, and Reading sections.",
+        },
+        {
+          number: "02",
+          title: "Progress survives the session",
+          text: "Accounts, attempts, answers, section state, and deadlines are stored in PostgreSQL. A learner can leave a practice session, return later, and continue from saved work.",
+        },
+        {
+          number: "03",
+          title: "Useful feedback without false authority",
+          text: "Review screens explain original practice questions and report raw results, while the product clearly avoids presenting percentages as an official ETS scaled score or certificate.",
+        },
+      ],
+      decisions: [
+        {
+          title: "Enforce exam time on the server",
+          text: "The database stores section deadlines and the server controls section transitions, preventing a refreshed browser or edited client timer from reopening completed sections.",
+        },
+        {
+          title: "Treat scoring boundaries as a product feature",
+          text: "The interface distinguishes independent practice from certification and does not invent a 310–677 score from an uncalibrated question bank.",
+        },
+        {
+          title: "Move persistence from local SQLite to serverless Postgres",
+          text: "The production branch replaces ephemeral local-file storage with Neon and an idempotent schema initializer, making accounts and attempts durable across Vercel function instances.",
+        },
+        {
+          title: "Keep authentication small and inspectable",
+          text: "Passwords use per-user salts and scrypt hashes; sessions store token hashes server-side and reach the browser through HttpOnly cookies.",
+        },
+      ],
+      validation: [
+        "TypeScript checking and a production Next.js build passed before deployment.",
+        "The live smoke test covered registration, practice creation, answer saving, and persistence after reload.",
+        "The deployed feature branch uses a Production-only DATABASE_URL secret linked to Neon.",
+      ],
+      nextSteps: [
+        "Replace browser speech synthesis with reviewed, properly licensed human-recorded audio.",
+        "Add email verification, password recovery, rate limiting, and a documented backup policy.",
+        "Expand and review the question bank before making stronger learning-outcome claims.",
+      ],
+    },
   },
   {
     slug: "signallens-analytics",
-    number: "02",
+    number: "03",
     title: "SignalLens Analytics",
-    category: "Data product",
-    label: "Demo case study",
+    category: "Data product concept",
+    label: "Concept case study",
     summary:
-      "A customer-health analytics product that turns raw behavioral data into explainable risk signals and practical next actions.",
+      "A customer-health analytics concept that turns behavioral data into explainable risk signals and practical next actions.",
     challenge:
-      "Customer teams have plenty of usage data but no dependable way to identify accounts needing attention. A useful solution must be accurate, interpretable, and simple to act on.",
+      "Customer teams can have plenty of usage data but no dependable way to identify accounts needing attention. A useful solution must be accurate, interpretable, and simple to act on.",
     solution:
-      "A reproducible Python pipeline for feature preparation and model evaluation, paired with a web dashboard that explains risk drivers instead of showing a black-box score.",
+      "A proposed Python pipeline for feature preparation and model evaluation, paired with a web dashboard that explains risk drivers instead of showing a black-box score.",
     outcome:
-      "Replace this copy with validated model performance and the real business decision improved by the product.",
+      "This concept is ready to be developed against a real dataset and validated with measurable model performance and a clearly defined customer-success decision.",
     metrics: [
       { value: "01", label: "Explainable risk score" },
       { value: "24h", label: "Pipeline refresh target" },
@@ -70,37 +244,18 @@ export const projects = [
     ],
     stack: ["Python", "Pandas", "scikit-learn", "FastAPI", "Next.js"],
     services: ["Data exploration", "Model development", "API integration", "Analytics UI"],
-    accent: "cyan",
-  },
-  {
-    slug: "ledgerly-saas",
-    number: "03",
-    title: "Ledgerly SaaS",
-    category: "SaaS application",
-    label: "Demo case study",
-    summary:
-      "A clean subscription-finance workspace built around predictable workflows, trustworthy calculations, and quick monthly review.",
-    challenge:
-      "A small finance team needs a simpler way to reconcile recurring revenue and understand movement between periods without maintaining fragile spreadsheet formulas.",
-    solution:
-      "A multi-tenant SaaS application with secure account boundaries, import validation, reconciliation workflows, and accessible financial summaries.",
-    outcome:
-      "Add verified product outcomes here: processing time, error reduction, active teams, or successful reconciliations.",
-    metrics: [
-      { value: "CSV", label: "Validated imports" },
-      { value: "RBAC", label: "Account permissions" },
-      { value: "MRR", label: "Movement reporting" },
-    ],
-    stack: ["React", "Node.js", "PostgreSQL", "Auth", "Cloud hosting"],
-    services: ["SaaS architecture", "Design system", "Secure authentication", "QA & launch"],
     accent: "violet",
+    kind: "concept",
+    repositoryName: null,
+    repositoryUrl: null,
+    liveUrl: null,
   },
   {
     slug: "demandcast-forecasting",
     number: "04",
     title: "DemandCast",
     category: "Forecasting system",
-    label: "Demo case study",
+    label: "Concept case study",
     summary:
       "A forecasting workflow that helps a retail team compare demand scenarios, monitor model drift, and plan with clearer uncertainty.",
     challenge:
@@ -108,7 +263,7 @@ export const projects = [
     solution:
       "A time-series evaluation pipeline with backtesting, baseline comparison, and a lightweight planning interface for reviewing forecasts by product and region.",
     outcome:
-      "Replace with the real forecast horizon, error improvement, and planning decision supported by your project.",
+      "This concept is ready to be implemented with a real retail dataset, then evaluated against a documented baseline, forecast horizon, and planning decision.",
     metrics: [
       { value: "MAPE", label: "Tracked by segment" },
       { value: "3", label: "Forecast scenarios" },
@@ -117,6 +272,10 @@ export const projects = [
     stack: ["Python", "SQL", "Time series", "FastAPI", "React"],
     services: ["Data cleaning", "Forecast evaluation", "API development", "Decision interface"],
     accent: "orange",
+    kind: "concept",
+    repositoryName: null,
+    repositoryUrl: null,
+    liveUrl: null,
   },
 ];
 
