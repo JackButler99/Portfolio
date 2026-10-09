@@ -11,8 +11,6 @@ export const sectionSpacing = "py-24 lg:py-32";
 export const sectionTitle =
   "m-0 max-w-[840px] text-4xl font-bold leading-[1.05] tracking-[-0.045em] text-foreground sm:text-5xl lg:text-6xl";
 
-export const bodyMuted = "text-ink-soft";
-
 export const projectAccentClasses: Record<PortfolioProject["accent"], string> = {
   lime: "[--project-accent:var(--blue)]",
   cyan: "[--project-accent:var(--teal)]",
