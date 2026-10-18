@@ -8,7 +8,7 @@ import { eyebrow, sectionSpacing, sectionTitle, shell } from "@/lib/portfolio-st
 import { cn } from "@/lib/utils";
 
 export default function Home() {
-  const liveProjects = projects.filter((project) => project.kind === "repository").slice(0, 2);
+  const liveProjects = projects.filter((project) => project.kind === "repository").slice(0, 3);
 
   return (
     <main id="main-content">
@@ -27,20 +27,6 @@ export default function Home() {
               <Link href="/contact">Talk about your project</Link>
             </Button>
           </div>
-          <dl className="mt-12 grid grid-cols-3 border-y border-[#d7dfe9] max-[760px]:grid-cols-1">
-            <div className="grid gap-2 border-r border-[#d7dfe9] py-4 pr-4 max-[760px]:grid-cols-[52px_1fr] max-[760px]:items-center max-[760px]:border-b max-[760px]:border-r-0 max-[760px]:py-3 max-[760px]:pr-0">
-              <dt className="font-mono text-2xl font-extrabold leading-none tracking-[-0.03em] text-primary">01</dt>
-              <dd className="m-0 text-sm leading-5 text-ink-soft">Clear product thinking</dd>
-            </div>
-            <div className="grid gap-2 border-r border-[#d7dfe9] px-4 py-4 max-[760px]:grid-cols-[52px_1fr] max-[760px]:items-center max-[760px]:border-b max-[760px]:border-r-0 max-[760px]:px-0 max-[760px]:py-3">
-              <dt className="font-mono text-2xl font-extrabold leading-none tracking-[-0.03em] text-primary">02</dt>
-              <dd className="m-0 text-sm leading-5 text-ink-soft">Full-stack delivery</dd>
-            </div>
-            <div className="grid gap-2 py-4 pl-4 max-[760px]:grid-cols-[52px_1fr] max-[760px]:items-center max-[760px]:py-3 max-[760px]:pl-0">
-              <dt className="font-mono text-2xl font-extrabold leading-none tracking-[-0.03em] text-primary">03</dt>
-              <dd className="m-0 text-sm leading-5 text-ink-soft">Data-backed outcomes</dd>
-            </div>
-          </dl>
         </div>
 
         <HeroProjectShowcase projects={liveProjects} />

@@ -17,15 +17,17 @@ export function HeroProjectShowcase({ projects }: HeroProjectShowcaseProps) {
   const activeProject = projects.find((project) => project.slug === activeSlug) ?? projects[0];
 
   if (!activeProject) return null;
+  const isPhysicsStudio = activeProject.slug === "physics-studio";
 
   const visualClassName = cn(
-    "relative block aspect-[1.58] cursor-pointer overflow-hidden rounded-2xl border border-[#d8d4ce] bg-charcoal outline-none focus-visible:ring-4 focus-visible:ring-[var(--project-accent)]/30",
+    "relative block cursor-pointer overflow-hidden rounded-2xl border border-[#d8d4ce] bg-[#f5f7fb] outline-none focus-visible:ring-4 focus-visible:ring-[var(--project-accent)]/30",
+    isPhysicsStudio ? "aspect-[1919/943]" : "aspect-[1.58]",
   );
 
   return (
     <article className={cn("group relative overflow-hidden rounded-3xl border border-[#d8d3ca] bg-[#fffdf9]/95 p-3 shadow-[0_30px_75px_rgba(31,39,53,0.13)] motion-safe:animate-[enter_600ms_110ms_ease_both] max-[760px]:rounded-[18px] max-[760px]:p-2.5", projectAccentClasses[activeProject.accent])}>
       <div className="pointer-events-none absolute -right-24 -top-24 size-64 rounded-full bg-[color-mix(in_srgb,var(--project-accent)_10%,transparent)] blur" aria-hidden="true" />
-      <div className="relative z-10 mb-2.5 grid grid-cols-2 gap-1 rounded-xl border border-[#e0dbd2] bg-[#f1ede7] p-1" role="tablist" aria-label="Live portfolio projects">
+      <div className="relative z-10 mb-2.5 grid grid-flow-col auto-cols-fr gap-1 rounded-xl border border-[#e0dbd2] bg-[#f1ede7] p-1" role="tablist" aria-label="Live portfolio projects">
         {projects.map((project) => (
           <button
             key={project.slug}
@@ -68,13 +70,36 @@ export function HeroProjectShowcase({ projects }: HeroProjectShowcaseProps) {
                 fill
                 priority
                 sizes="(max-width: 1080px) 90vw, 48vw"
-                className={cn("object-cover object-top transition-transform duration-300 group-hover:scale-[1.012]", activeProject.slug === "learn-toefl" && "object-bottom")}
+                className={cn(
+                  isPhysicsStudio
+                    ? "object-contain object-center transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                    : "object-cover object-top transition-transform duration-300 group-hover:scale-[1.012]",
+                  activeProject.slug === "learn-toefl" && "object-bottom",
+                )}
               />
-              <div className="pointer-events-none absolute inset-x-3.5 bottom-3 z-10 flex items-center justify-between gap-3.5 font-mono text-[0.68rem] font-bold uppercase tracking-[0.05em] text-white">
-                <span className="inline-flex items-center gap-2"><i className="size-[7px] rounded-full bg-[#62d6a4] shadow-[0_0_0_4px_rgba(98,214,164,0.18)]" aria-hidden="true" /> Live product</span>
+              <div
+                className={cn(
+                  "pointer-events-none absolute inset-x-3.5 bottom-3 z-10 flex items-center justify-between gap-3.5 font-mono text-[0.68rem] font-bold uppercase tracking-[0.05em] text-white",
+                  isPhysicsStudio &&
+                    "rounded-lg bg-slate-950/70 px-3 py-2 backdrop-blur-sm",
+                )}
+              >
+                <span className="inline-flex items-center gap-2">
+                  <i
+                    className="size-[7px] rounded-full bg-[#62d6a4] shadow-[0_0_0_4px_rgba(98,214,164,0.18)]"
+                    aria-hidden="true"
+                  />
+                  Live product
+                </span>
                 <span>{activeProject.category}</span>
               </div>
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-b from-transparent to-[rgba(13,18,26,0.72)]" aria-hidden="true" />
+              <div
+                className={cn(
+                  "pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-b from-transparent",
+                  activeProject.slug === "physics-studio" ? "h-2/5 to-[rgba(13,18,26,0.62)]" : "h-3/5 to-[rgba(13,18,26,0.72)]",
+                )}
+                aria-hidden="true"
+              />
             </a>
           ) : (
             <div className={visualClassName}>
@@ -85,12 +110,21 @@ export function HeroProjectShowcase({ projects }: HeroProjectShowcaseProps) {
                 fill
                 priority
                 sizes="(max-width: 1080px) 90vw, 48vw"
-                className={cn("object-cover object-top", activeProject.slug === "learn-toefl" && "object-bottom")}
+                className={cn(
+                  "object-cover object-top",
+                  activeProject.slug === "learn-toefl" && "object-bottom",
+                  activeProject.slug === "physics-studio" && "origin-[56%_0%] scale-[1.18]",
+                )}
               />
               <div className="absolute inset-x-3.5 bottom-3 z-10 flex items-center justify-between gap-3.5 font-mono text-[0.68rem] font-bold uppercase tracking-[0.05em] text-white">
                 <span>{activeProject.category}</span>
               </div>
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-b from-transparent to-[rgba(13,18,26,0.72)]" aria-hidden="true" />
+              {!isPhysicsStudio ? (
+              <div
+                className="pointer-events-none absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-b from-transparent to-[rgba(13,18,26,0.72)]"
+                aria-hidden="true"
+              />
+            ) : null}
             </div>
           )
         ) : null}

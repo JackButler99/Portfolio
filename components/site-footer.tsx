@@ -33,7 +33,6 @@ export function SiteFooter() {
           <span className="mb-2 font-mono text-xs font-bold uppercase tracking-[0.08em] text-[#89a9fb]">Connect</span>
           <a className="text-sm font-semibold text-[#aeb8c5] transition-colors hover:text-white" href={profile.upworkUrl} target="_blank" rel="noreferrer">Upwork</a>
           <a className="text-sm font-semibold text-[#aeb8c5] transition-colors hover:text-white" href={profile.githubUrl} target="_blank" rel="noreferrer">GitHub</a>
-          <Link className="text-sm font-semibold text-[#aeb8c5] transition-colors hover:text-white" href="/contact">LinkedIn</Link>
           <a className="text-sm font-semibold text-[#aeb8c5] transition-colors hover:text-white" href={`mailto:${profile.email}`}>Email</a>
         </div>
       </div>

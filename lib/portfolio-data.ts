@@ -224,8 +224,120 @@ export const projects: PortfolioProject[] = [
     },
   },
   {
-    slug: "signallens-analytics",
+    slug: "physics-studio",
     number: "03",
+    title: "Physics Studio",
+    shortTitle: "Physics Studio",
+    category: "Interactive physics learning platform",
+    label: "Live independent product",
+    summary:
+      "An interactive physics learning platform combining guided courses, numerical simulations, structured practice, and technical explanations across seven physics topic areas.",
+    challenge:
+      "Physics software needs to do more than animate diagrams. The application had to connect mathematical models, explanations, experiments, questions, and saved learner progress without presenting simplified simulations as complete physical reality.\n\nThe larger engineering challenge was coordinating a Next.js interface with separate curriculum and physics services. Interactive animations needed immediate browser-side performance, while lesson content, answer checking, and reference calculations still required clear server boundaries and consistent model constraints.",
+    solution:
+      "I structured Physics Studio as a TypeScript monorepo containing a Next.js web application, separate curriculum and physics services, shared runtime contracts, and a reusable numerical physics package.\n\nThe browser imports the same physics kernel used by the calculation service, keeping interactive experiments and server-generated reference values consistent. Canvas animation runs through requestAnimationFrame outside React’s render cycle, while throttled readouts prevent simulation updates from causing unnecessary component renders.\n\nNext.js Route Handlers connect the interface to the curriculum and physics services. KaTeX renders equations with accessible MathML, browser storage preserves course progress and reasoning notes, and Docker Compose provides a reproducible three-process deployment environment.",
+    outcome:
+      "The application now combines seven physics topic areas, a seventeen-unit classical mechanics course, guided discovery activities, interactive laboratories, answer checking, notebook exports, and saved browser progress through one consistent interface.\n\nAutomated checks cover numerical limits, conserved quantities, curriculum validation, component behavior, API failures, production builds, and live HTTP integration across the web, curriculum, and physics processes.",
+    metrics: [
+      { value: "7", label: "Physics topic areas" },
+      { value: "17", label: "Mechanics course units" },
+      { value: "3", label: "Runtime services" },
+    ],
+    stack: [
+      "Next.js",
+      "TypeScript",
+      "Node.js",
+      "Canvas API",
+      "KaTeX",
+      "Docker",
+    ],
+    services: [
+      "Full-stack architecture",
+      "Physics-model integration",
+      "Interactive learning UX",
+      "Testing & deployment",
+    ],
+    accent: "violet",
+    kind: "repository",
+    repositoryName: "JackButler99/physics-studio",
+    repositoryUrl: "https://github.com/JackButler99/physics-studio",
+    liveUrl: "https://physics-studio.vercel.app/",
+    image: "/projects/physics-studio-landing.png",
+    imageAlt: "Physics Studio interactive learning platform preview",
+    caseStudy: {
+      overview: [
+        {
+          label: "Product",
+          value: "Interactive physics learning and simulation platform",
+        },
+        {
+          label: "My role",
+          value: "Product design, full-stack architecture, and physics-model integration",
+        },
+        {
+          label: "Delivery",
+          value: "Independent TypeScript monorepo deployed through Vercel",
+        },
+      ],
+      highlights: [
+        {
+          number: "01",
+          title: "Guided learning beyond isolated simulations",
+          text:
+            "Courses connect prediction, experimentation, mathematical explanation, calculation practice, and review. Learners can record observations and export their reasoning instead of only adjusting animation controls.",
+        },
+        {
+          number: "02",
+          title: "Shared numerical models",
+          text:
+            "The browser and physics service use the same tested model package. Interactive playback remains responsive while server reference calculations follow identical parameter ranges and assumptions.",
+        },
+        {
+          number: "03",
+          title: "Separated curriculum and computation",
+          text:
+            "Lesson content and answer checking run in the curriculum service, while model validation and reference calculations belong to the physics service. The Next.js application exposes both through controlled Route Handlers.",
+        },
+      ],
+      decisions: [
+        {
+          title: "Use explicit service boundaries",
+          text:
+            "The web application does not own answer keys or reference calculations. Curriculum and physics responsibilities remain in separate processes, connected through documented HTTP contracts.",
+        },
+        {
+          title: "Share the physics kernel",
+          text:
+            "A reusable physics-core package prevents browser animations and server calculations from implementing the same equations independently and gradually producing different results.",
+        },
+        {
+          title: "Keep simulation updates outside React rendering",
+          text:
+            "Canvas playback uses requestAnimationFrame while interface readouts update at a lower frequency. Hidden tabs stop time advancement, and reduced-motion preferences start experiments paused.",
+        },
+        {
+          title: "Expose assumptions and limitations",
+          text:
+            "Each model describes its units, approximations, parameter limits, and physical assumptions. The product presents practice evidence without claiming validated mastery or complete classroom readiness.",
+        },
+      ],
+      validation: [
+        "Tested energy conservation, wave limits, Maxwell-distribution normalization, quantum boundary conditions, relativistic calculations, and invalid parameter handling.",
+        "Used simulated-DOM tests for guided activities, playback controls, saved progress, keyboard interaction, and API-failure recovery.",
+        "Ran TypeScript checking, production builds, and HTTP integration checks across the web, curriculum, and physics processes.",
+        "Confirmed successful deployment through the connected Vercel project while keeping browser visual review as a separate manual check.",
+      ],
+      nextSteps: [
+        "Add accounts and a durable backend for synchronized learner progress across devices.",
+        "Conduct educator review, learner think-aloud sessions, and delayed-transfer evaluation.",
+        "Complete browser-based accessibility and responsive-layout testing.",
+        "Move heavier numerical workloads into workers or queued compute services when model complexity requires it.",
+      ],
+    },
+  },
+  {
+    slug: "signallens-analytics",
+    number: "04",
     title: "SignalLens Analytics",
     category: "Data product concept",
     label: "Concept case study",
@@ -252,7 +364,7 @@ export const projects: PortfolioProject[] = [
   },
   {
     slug: "demandcast-forecasting",
-    number: "04",
+    number: "05",
     title: "DemandCast",
     category: "Forecasting system",
     label: "Concept case study",
