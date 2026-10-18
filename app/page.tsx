@@ -47,7 +47,7 @@ export default function Home() {
       <section className={cn(shell, sectionSpacing)}>
         <div className="mb-12 grid grid-cols-[minmax(0,1.2fr)_minmax(280px,0.65fr)] items-end gap-[clamp(48px,7vw,88px)] max-[760px]:mb-10 max-[760px]:grid-cols-1 max-[760px]:gap-6">
           <div>
-            <p className={eyebrow}>Selected work</p>
+            <p className={eyebrow}>More selected work</p>
             <h2 className={cn(sectionTitle, "mt-4")}>Useful software, seen from both sides.</h2>
           </div>
           <p className="m-0 border-l-2 border-[#c9d6f7] pl-6 text-base leading-7 text-ink-soft max-[760px]:border-l-0 max-[760px]:border-t-2 max-[760px]:pt-4 max-[760px]:pl-0">Repository-backed applications alongside clearly labeled data-product concepts, with the decisions and engineering behind each one.</p>
