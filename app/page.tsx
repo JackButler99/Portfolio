@@ -53,7 +53,7 @@ export default function Home() {
           <p className="m-0 border-l-2 border-[#c9d6f7] pl-6 text-base leading-7 text-ink-soft max-[760px]:border-l-0 max-[760px]:border-t-2 max-[760px]:pt-4 max-[760px]:pl-0">Repository-backed applications alongside clearly labeled data-product concepts, with the decisions and engineering behind each one.</p>
         </div>
         <div className="grid grid-cols-3 gap-5 max-[1080px]:grid-cols-2 max-[760px]:grid-cols-1">
-          {projects.slice(1, 4).map((project) => (
+          {projects.slice(0, 3).map((project) => (
             <ProjectCard key={project.slug} project={project} />
           ))}
         </div>

@@ -5,7 +5,12 @@ import { cn } from "@/lib/utils";
 
 export function ProjectCard({ project }: { project: PortfolioProject }) {
   return (
-    <article className={cn("group flex min-w-0 flex-col rounded-xl border border-[#d8e0ea] bg-white p-[18px] shadow-[var(--shadow-sm)] transition-[border-color,transform,box-shadow] hover:-translate-y-1 hover:border-[var(--project-accent)] hover:shadow-[0_18px_40px_rgba(21,34,54,0.1)]", projectAccentClasses[project.accent])}>
+    <article
+      className={cn(
+        "group flex min-w-0 cursor-pointer flex-col rounded-xl border border-[#d8e0ea] bg-white p-[18px] shadow-[var(--shadow-sm)] transition-[border-color,transform,box-shadow] hover:-translate-y-1 hover:border-[var(--project-accent)] hover:shadow-[0_18px_40px_rgba(21,34,54,0.1)]",
+        projectAccentClasses[project.accent],
+      )}
+    >
       <div className="mb-3.5 flex items-center justify-between font-mono text-xs uppercase tracking-[0.06em]">
         <span className="text-base font-extrabold leading-none text-[var(--project-accent)]">{project.number}</span>
         <span className="text-[#768396]">{project.label}</span>
