@@ -366,7 +366,7 @@ export const projects: PortfolioProject[] = [
     kind: "repository",
     repositoryName: "JackButler99/market-lab",
     repositoryUrl: "https://github.com/JackButler99/market-lab",
-    liveUrl: "https://market-lab-git-feature-v2-jackbutler99s-projects.vercel.app/",
+    liveUrl: "https://market-lab-pi.vercel.app/",
     image: "/projects/market-lab-v2-landing.png",
     imageAlt: "Signal Market Lab v2 forecast research dashboard",
     caseStudy: {
