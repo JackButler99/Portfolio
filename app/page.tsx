@@ -8,7 +8,7 @@ import { eyebrow, sectionSpacing, sectionTitle, shell } from "@/lib/portfolio-st
 import { cn } from "@/lib/utils";
 
 export default function Home() {
-  const liveProjects = projects.filter((project) => project.kind === "repository").slice(0, 3);
+  const liveProjects = projects.filter((project) => project.kind === "repository").slice(0, 4);
 
   return (
     <main id="main-content">
@@ -47,13 +47,13 @@ export default function Home() {
       <section className={cn(shell, sectionSpacing)}>
         <div className="mb-12 grid grid-cols-[minmax(0,1.2fr)_minmax(280px,0.65fr)] items-end gap-[clamp(48px,7vw,88px)] max-[760px]:mb-10 max-[760px]:grid-cols-1 max-[760px]:gap-6">
           <div>
-            <p className={eyebrow}>More selected work</p>
+            <p className={eyebrow}>Selected work</p>
             <h2 className={cn(sectionTitle, "mt-4")}>Useful software, seen from both sides.</h2>
           </div>
           <p className="m-0 border-l-2 border-[#c9d6f7] pl-6 text-base leading-7 text-ink-soft max-[760px]:border-l-0 max-[760px]:border-t-2 max-[760px]:pt-4 max-[760px]:pl-0">Repository-backed applications alongside clearly labeled data-product concepts, with the decisions and engineering behind each one.</p>
         </div>
-        <div className="grid grid-cols-3 gap-5 max-[1080px]:grid-cols-2 max-[760px]:grid-cols-1">
-          {projects.slice(0, 3).map((project) => (
+        <div className="grid grid-cols-2 gap-5 max-[760px]:grid-cols-1">
+          {projects.slice(0, 4).map((project) => (
             <ProjectCard key={project.slug} project={project} />
           ))}
         </div>

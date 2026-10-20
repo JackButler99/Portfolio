@@ -30,12 +30,14 @@ export function ProjectCard({ project }: { project: PortfolioProject }) {
             fill
             sizes="(max-width: 760px) 92vw, (max-width: 1080px) 46vw, 31vw"
             className={cn(
-              "transition-transform duration-500 ease-out group-hover:scale-[1.025]",
+              "transition-transform duration-500 ease-out",
               project.slug === "learn-toefl"
-                ? "object-cover object-bottom"
-                : project.slug === "physics-studio"
-                  ? "object-contain object-center"
-                  : "object-cover object-top",
+                ? "object-cover object-bottom group-hover:scale-[1.025]"
+                : project.slug === "market-lab"
+                  ? "scale-[0.96] object-contain object-center group-hover:scale-100"
+                  : project.slug === "physics-studio"
+                    ? "object-contain object-center group-hover:scale-[1.025]"
+                  : "object-cover object-top group-hover:scale-[1.025]",
             )}
           />
         ) : (

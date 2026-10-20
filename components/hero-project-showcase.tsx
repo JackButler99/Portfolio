@@ -18,16 +18,18 @@ export function HeroProjectShowcase({ projects }: HeroProjectShowcaseProps) {
 
   if (!activeProject) return null;
   const isPhysicsStudio = activeProject.slug === "physics-studio";
+  const isMarketLab = activeProject.slug === "market-lab";
+  const usesContainedPreview = isPhysicsStudio || isMarketLab;
 
   const visualClassName = cn(
     "relative block cursor-pointer overflow-hidden rounded-2xl border border-[#d8d4ce] bg-[#f5f7fb] outline-none focus-visible:ring-4 focus-visible:ring-[var(--project-accent)]/30",
-    isPhysicsStudio ? "aspect-[1919/943]" : "aspect-[1.58]",
+    isPhysicsStudio ? "aspect-[1919/943]" : isMarketLab ? "aspect-[16/10]" : "aspect-[1.58]",
   );
 
   return (
     <article className={cn("group relative overflow-hidden rounded-3xl border border-[#d8d3ca] bg-[#fffdf9]/95 p-3 shadow-[0_30px_75px_rgba(31,39,53,0.13)] motion-safe:animate-[enter_600ms_110ms_ease_both] max-[760px]:rounded-[18px] max-[760px]:p-2.5", projectAccentClasses[activeProject.accent])}>
       <div className="pointer-events-none absolute -right-24 -top-24 size-64 rounded-full bg-[color-mix(in_srgb,var(--project-accent)_10%,transparent)] blur" aria-hidden="true" />
-      <div className="relative z-10 mb-2.5 grid grid-flow-col auto-cols-fr gap-1 rounded-xl border border-[#e0dbd2] bg-[#f1ede7] p-1" role="tablist" aria-label="Live portfolio projects">
+      <div className="relative z-10 mb-2.5 grid grid-cols-4 gap-1 rounded-xl border border-[#e0dbd2] bg-[#f1ede7] p-1 max-[640px]:grid-cols-2" role="tablist" aria-label="Live portfolio projects">
         {projects.map((project) => (
           <button
             key={project.slug}
@@ -71,8 +73,10 @@ export function HeroProjectShowcase({ projects }: HeroProjectShowcaseProps) {
                 priority
                 sizes="(max-width: 1080px) 90vw, 48vw"
                 className={cn(
-                  isPhysicsStudio
-                    ? "object-contain object-center transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                  isMarketLab
+                    ? "scale-[0.96] object-contain object-center transition-transform duration-500 ease-out group-hover:scale-100"
+                    : isPhysicsStudio
+                      ? "object-contain object-center transition-transform duration-500 ease-out group-hover:scale-[1.025]"
                     : "object-cover object-top transition-transform duration-300 group-hover:scale-[1.012]",
                   activeProject.slug === "learn-toefl" && "object-bottom",
                 )}
@@ -80,7 +84,7 @@ export function HeroProjectShowcase({ projects }: HeroProjectShowcaseProps) {
               <div
                 className={cn(
                   "pointer-events-none absolute inset-x-3.5 bottom-3 z-10 flex items-center justify-between gap-3.5 font-mono text-[0.68rem] font-bold uppercase tracking-[0.05em] text-white",
-                  isPhysicsStudio &&
+                  usesContainedPreview &&
                     "rounded-lg bg-slate-950/70 px-3 py-2 backdrop-blur-sm",
                 )}
               >
@@ -96,7 +100,7 @@ export function HeroProjectShowcase({ projects }: HeroProjectShowcaseProps) {
               <div
                 className={cn(
                   "pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-b from-transparent",
-                  activeProject.slug === "physics-studio" ? "h-2/5 to-[rgba(13,18,26,0.62)]" : "h-3/5 to-[rgba(13,18,26,0.72)]",
+                  usesContainedPreview ? "h-2/5 to-[rgba(13,18,26,0.62)]" : "h-3/5 to-[rgba(13,18,26,0.72)]",
                 )}
                 aria-hidden="true"
               />
@@ -113,13 +117,13 @@ export function HeroProjectShowcase({ projects }: HeroProjectShowcaseProps) {
                 className={cn(
                   "object-cover object-top",
                   activeProject.slug === "learn-toefl" && "object-bottom",
-                  activeProject.slug === "physics-studio" && "origin-[56%_0%] scale-[1.18]",
+                  usesContainedPreview && "object-contain object-center",
                 )}
               />
               <div className="absolute inset-x-3.5 bottom-3 z-10 flex items-center justify-between gap-3.5 font-mono text-[0.68rem] font-bold uppercase tracking-[0.05em] text-white">
                 <span>{activeProject.category}</span>
               </div>
-              {!isPhysicsStudio ? (
+              {!usesContainedPreview ? (
               <div
                 className="pointer-events-none absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-b from-transparent to-[rgba(13,18,26,0.72)]"
                 aria-hidden="true"

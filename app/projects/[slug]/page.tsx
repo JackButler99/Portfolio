@@ -41,9 +41,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   const project = projects.find((item) => item.slug === slug);
 
   if (!project) notFound();
+  const isMarketLab = project.slug === "market-lab";
 
   const mediaClassName = cn(
-    "relative block aspect-[1.42] overflow-hidden rounded-[22px] border-[8px] border-white/80 bg-charcoal shadow-[0_30px_75px_rgba(25,34,47,0.18)] outline-none transition-transform lg:rotate-[1.2deg] focus-visible:ring-4 focus-visible:ring-[var(--project-accent)]/30 max-[760px]:aspect-[1.34] max-[760px]:rounded-2xl max-[760px]:border-[6px]",
+    "group relative block overflow-hidden rounded-[22px] border-[8px] border-white/80 bg-charcoal shadow-[0_30px_75px_rgba(25,34,47,0.18)] outline-none transition-transform lg:rotate-[1.2deg] focus-visible:ring-4 focus-visible:ring-[var(--project-accent)]/30 max-[760px]:rounded-2xl max-[760px]:border-[6px]",
+    isMarketLab ? "aspect-[16/10] max-[760px]:aspect-[16/10]" : "aspect-[1.42] max-[760px]:aspect-[1.34]",
   );
 
   return (
@@ -95,7 +97,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   fill
                   priority
                   sizes="(max-width: 1080px) 92vw, 46vw"
-                  className={cn("object-cover object-top", project.slug === "learn-toefl" && "object-bottom")}
+                  className={cn("object-cover object-top", project.slug === "learn-toefl" && "object-bottom", isMarketLab && "scale-[0.96] object-contain object-center transition-transform duration-500 ease-out group-hover:scale-100")}
                 />
                 <div className="pointer-events-none absolute inset-x-[18px] bottom-4 z-10 flex items-center justify-between gap-3 font-mono text-xs font-bold uppercase tracking-[0.06em] text-white">
                   <span className="inline-flex items-center gap-2"><i className="size-2 rounded-full bg-[#62d6a4] shadow-[0_0_0_4px_rgba(98,214,164,0.18)]" aria-hidden="true" /> Live product</span>
@@ -111,7 +113,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   fill
                   priority
                   sizes="(max-width: 1080px) 92vw, 46vw"
-                  className={cn("object-cover object-top", project.slug === "learn-toefl" && "object-bottom")}
+                  className={cn("object-cover object-top", project.slug === "learn-toefl" && "object-bottom", isMarketLab && "scale-[0.96] object-contain object-center transition-transform duration-500 ease-out group-hover:scale-100")}
                 />
                 <div className="absolute inset-x-[18px] bottom-4 z-10 flex items-center font-mono text-xs font-bold uppercase tracking-[0.06em] text-white">
                   <span>Project preview</span>

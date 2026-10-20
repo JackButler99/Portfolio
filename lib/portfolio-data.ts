@@ -336,8 +336,104 @@ export const projects: PortfolioProject[] = [
     },
   },
   {
-    slug: "signallens-analytics",
+    slug: "market-lab",
     number: "04",
+    title: "Signal Market Lab",
+    shortTitle: "Market Lab",
+    category: "Forecast research platform",
+    label: "Live independent product",
+    summary:
+      "A browser-based market research workspace for running time-series experiments, comparing forecast models against a simple baseline, and inspecting price and fundamental evidence across four asset types.",
+    challenge:
+      "Forecasting interfaces can look convincing while hiding data provenance, evaluation leakage, and weak baselines. The product needed to make every experiment explicit: which dataset, model, horizon, chronological split, and error metric produced the result.\n\nThe second challenge was deployment. Local development uses a Python API and SQLite, but the public Vercel build could not depend on a continuously running backend or expose provider credentials. Visitors still needed to run experiments, compare models, and import private CSV data safely.",
+    solution:
+      "I built a Next.js and TypeScript research interface backed locally by a Python service for ingestion, validation, forecasting, walk-forward backtesting, and SQLite persistence. The experiment engine evaluates a 30-observation log-linear trend against a last-price naive baseline on the same chronological origins, reports MAE, and keeps forecast output hidden until the user explicitly runs an experiment.\n\nFor the deployed v2, GitHub Actions produces normalized public snapshots on a six-hour schedule while Vercel exposes them through read-only route handlers. Forecast experiments and CSV imports run entirely in the browser; private datasets and up to 20 local runs stay in localStorage instead of reaching a server.",
+    outcome:
+      "The deployed v2 provides one research workflow for AAPL, MSFT, EURUSD, and BTCUSD, with published price snapshots, explicit experiment execution, side-by-side model comparison, a recent-run registry, validated CSV imports, and asset-specific fundamental evidence.\n\nThe architecture separates administrator-managed data refresh from visitor computation. Provider secrets remain in GitHub Actions, a failed refresh preserves the last successful snapshot, and local development retains the Python and SQLite path for deeper backend research.",
+    metrics: [
+      { value: "4", label: "Supported market datasets" },
+      { value: "2", label: "Forecast models compared" },
+      { value: "6h", label: "Public snapshot schedule" },
+    ],
+    stack: ["Next.js", "TypeScript", "Python", "SQLite", "GitHub Actions", "Vercel"],
+    services: [
+      "Full-stack architecture",
+      "Forecast evaluation",
+      "Data pipeline design",
+      "Deployment automation",
+    ],
+    accent: "orange",
+    kind: "repository",
+    repositoryName: "JackButler99/market-lab",
+    repositoryUrl: "https://github.com/JackButler99/market-lab",
+    liveUrl: "https://market-lab-git-feature-v2-jackbutler99s-projects.vercel.app/",
+    image: "/projects/market-lab-v2-landing.png",
+    imageAlt: "Signal Market Lab v2 forecast research dashboard",
+    caseStudy: {
+      overview: [
+        { label: "Product", value: "Interactive market and forecast research workspace" },
+        { label: "My role", value: "Product design, full-stack engineering, and forecast evaluation" },
+        { label: "Delivery", value: "Deployed v2 with browser experiments and scheduled public snapshots" },
+      ],
+      highlights: [
+        {
+          number: "01",
+          title: "Experiments are explicit and comparable",
+          text:
+            "A forecast appears only after the visitor selects an asset, dataset, model, and observation horizon, then runs an experiment. The comparison flow evaluates the trend and naive models on the same walk-forward origins and reports their MAE side by side.",
+        },
+        {
+          number: "02",
+          title: "Private CSV research stays in the browser",
+          text:
+            "Visitors can import a validated date-and-close dataset without uploading it to the application server. The browser creates a content-derived dataset ID, runs the experiment locally, and retains at most 20 runs in localStorage.",
+        },
+        {
+          number: "03",
+          title: "Market context includes source evidence",
+          text:
+            "The research workspace combines price experiments with SEC evidence for equities, macro context for EURUSD, and network evidence for Bitcoin. Beginner, intermediate, and expert explanations remain separate from the forecast model.",
+        },
+      ],
+      decisions: [
+        {
+          title: "Use chronological evaluation with a real baseline",
+          text:
+            "Each model is evaluated only against later observations and compared with a last-price baseline using identical origins and horizons. This makes improvement measurable without presenting historical error as guaranteed future performance.",
+        },
+        {
+          title: "Separate the local and public runtime paths",
+          text:
+            "Local development uses the Python API and SQLite for ingestion, persistence, and research. Production switches to published snapshots plus browser computation, allowing a useful public demo without keeping a paid backend online.",
+        },
+        {
+          title: "Keep provider credentials outside client code",
+          text:
+            "Scheduled GitHub Actions own provider access and publish a normalized snapshot. Vercel reads only that public artifact, so no provider secret is bundled into JavaScript or accepted from a visitor request.",
+        },
+        {
+          title: "Bind results to the complete experiment selection",
+          text:
+            "The interface keys a result by asset, dataset version, model, and horizon. Changing any input invalidates the visible result, preventing a chart from silently displaying output generated with different settings.",
+        },
+      ],
+      validation: [
+        "Confirmed that Vercel successfully deployed the merge commit containing the final v2 experiment flow.",
+        "Verified that production mutations are handled in the browser and do not issue HTTP POST requests.",
+        "Checked CSV limits, row validation, dataset hashing, local-storage bounds, and corrupted-state rejection.",
+        "Reviewed snapshot schema, payload-size, repository-name, timeout, and stale-data safeguards.",
+      ],
+      nextSteps: [
+        "Add an untouched final test window and trading-cost-aware evaluation before exploring strategy claims.",
+        "Persist dataset lineage and experiment metadata across devices without uploading private CSV content by default.",
+        "Add freshness monitoring and visible alerts for failed scheduled snapshots or upstream parser changes.",
+        "Move heavier browser experiments into a Web Worker as model complexity and dataset size increase.",
+      ],
+    },
+  },
+  {
+    slug: "signallens-analytics",
+    number: "05",
     title: "SignalLens Analytics",
     category: "Data product concept",
     label: "Concept case study",
@@ -364,7 +460,7 @@ export const projects: PortfolioProject[] = [
   },
   {
     slug: "demandcast-forecasting",
-    number: "05",
+    number: "06",
     title: "DemandCast",
     category: "Forecasting system",
     label: "Concept case study",
