@@ -17,7 +17,7 @@ export function SiteFooter() {
               <span className="mt-1 max-w-[310px] font-mono text-[0.68rem] uppercase leading-[1.35] tracking-[0.08em] text-[#aeb8c5]">{profile.role}</span>
             </span>
           </Link>
-          <p className="mt-6 max-w-[460px] text-sm text-[#aeb8c5]">Built to turn complex product and data work into useful, dependable software.</p>
+          <p className="mt-6 max-w-[460px] text-sm text-[#aeb8c5]">Web development and data tools, built with Next.js, TypeScript, PostgreSQL, and Python.</p>
         </div>
 
         <div className="grid content-start gap-3">
@@ -31,9 +31,9 @@ export function SiteFooter() {
 
         <div className="grid content-start gap-3">
           <span className="mb-2 font-mono text-xs font-bold uppercase tracking-[0.08em] text-[#89a9fb]">Connect</span>
-          <a className="text-sm font-semibold text-[#aeb8c5] transition-colors hover:text-white" href={profile.upworkUrl} target="_blank" rel="noreferrer">Upwork</a>
+          <a className="text-sm font-semibold text-[#aeb8c5] transition-colors hover:text-white" href={profile.upworkUrl} target="_blank" rel="noopener noreferrer">{profile.contactLabel}</a>
           <a className="text-sm font-semibold text-[#aeb8c5] transition-colors hover:text-white" href={profile.githubUrl} target="_blank" rel="noreferrer">GitHub</a>
-          <a className="text-sm font-semibold text-[#aeb8c5] transition-colors hover:text-white" href={`mailto:${profile.email}`}>Email</a>
+          <p className="max-w-[240px] text-xs leading-5 text-[#aeb8c5]">Send me your project brief on Upwork.</p>
         </div>
       </div>
       <div className={cn(shell, "flex justify-between gap-5 border-t border-white/10 py-5 font-mono text-[0.68rem] text-[#aeb8c5] max-[460px]:flex-col")}>

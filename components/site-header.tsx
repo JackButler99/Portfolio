@@ -20,7 +20,7 @@ export function SiteHeader() {
         </Link>
 
         <nav className="flex items-center justify-center gap-8 max-[1080px]:hidden" aria-label="Primary navigation">
-          {navItems.map((item) =>
+          {navItems.filter((item) => item.href !== profile.upworkUrl).map((item) =>
             item.external ? (
               <a className="text-sm font-semibold text-[#566273] transition-colors hover:text-primary focus-visible:text-primary" key={item.href} href={item.href} target="_blank" rel="noreferrer">
                 {item.label}
@@ -34,7 +34,7 @@ export function SiteHeader() {
         </nav>
 
         <Button asChild className="min-h-[43px] justify-self-end px-5 max-[1080px]:hidden text-gray-100">
-          <Link href="/contact">Start a project</Link>
+          <a href={profile.upworkUrl} target="_blank" rel="noopener noreferrer">{profile.contactLabel}</a>
         </Button>
 
         <details className="relative hidden justify-self-end max-[1080px]:block">

@@ -93,7 +93,7 @@ export function HeroProjectShowcase({ projects }: HeroProjectShowcaseProps) {
                     className="size-[7px] rounded-full bg-[#62d6a4] shadow-[0_0_0_4px_rgba(98,214,164,0.18)]"
                     aria-hidden="true"
                   />
-                  Live product
+                  Live demo
                 </span>
                 <span>{activeProject.category}</span>
               </div>
@@ -157,7 +157,7 @@ export function HeroProjectShowcase({ projects }: HeroProjectShowcaseProps) {
           <div className="flex flex-wrap items-center justify-end gap-x-4 gap-y-2 text-xs font-bold max-[760px]:justify-start">
             {activeProject.liveUrl ? (
               <a className="inline-flex items-center gap-1.5 rounded-lg bg-charcoal px-3 py-2 text-white! transition-colors hover:bg-[var(--project-accent)]" href={activeProject.liveUrl} target="_blank" rel="noreferrer">
-                Try live <ArrowUpRight aria-hidden="true" />
+                Try the demo <ArrowUpRight aria-hidden="true" />
               </a>
             ) : null}
             <Link

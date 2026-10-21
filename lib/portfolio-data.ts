@@ -1,20 +1,19 @@
 // Edit this file first when you are ready to replace the portfolio placeholders.
-// All core identity, service, project, and contact content lives here.
+// All core identity, service, project, and Upwork contact content lives here.
 
 export const profile = {
   name: "Ridho Kurniawan",
   initials: "RK",
-  role: "Full-Stack Developer & Data/AI Engineer",
+  role: "Full-Stack Developer",
   location: "Indonesia · Available worldwide",
   availability: "Open for freelance projects",
-  email: "ridhokurniawan32@gmail.com",
   intro:
-    "I build dependable web products and data systems—from the interface clients use to the pipelines and models working behind it.",
+    "I work on the interface, server logic, and database. My projects include learning platforms, multiplayer games, and tools for exploring data.",
   shortBio:
-    "An independent engineer focused on useful software, clear communication, and solutions that remain maintainable after launch.",
+    "I’m based in Indonesia. My background in engineering and research informs how I work with software, data, and numerical models.",
   upworkUrl: "https://www.upwork.com/freelancers/~01a56113f2390a9378",
+  contactLabel: "Contact me on Upwork",
   githubUrl: "https://github.com/JackButler99",
-  linkedinUrl: "#replace-with-your-linkedin-profile",
 };
 
 export const navItems = [
@@ -22,7 +21,7 @@ export const navItems = [
   { href: "/projects", label: "Projects", external: false },
   { href: "/services", label: "Services", external: false },
   { href: "/about", label: "About", external: false },
-  { href: "/contact", label: "Contact", external: false },
+  { href: profile.upworkUrl, label: profile.contactLabel, external: true },
   { href: profile.githubUrl, label: "GitHub", external: true },
 ];
 
@@ -65,15 +64,15 @@ export const projects: PortfolioProject[] = [
     title: "Main Berdua",
     shortTitle: "Main Berdua",
     category: "Multiplayer game platform",
-    label: "Live independent product",
+    label: "Independent project",
     summary:
-      "Main Berdua is a private, browser-based game platform for couples. Two players enter a shared room with a nickname and room code, then choose from five games ranging from quick hidden-answer prompts to a cooperative maze. The platform reuses the same room, player, and chat system while each game keeps its own rules and interface.",
+      "A browser game platform for two people, with five games, private rooms, and chat. Players join with a nickname and room code, and each game shares the same session system.",
     challenge:
-      "The project began as a single snakes-and-ladders game. Turning it into a five-game platform introduced a larger engineering problem: every game needed different rules and state, but players should not have to relearn how to create a room, invite a partner, chat, or continue a session.\n\nSome games also depend on hidden information. One player’s answer must remain private until both players submit. Turn-based games must keep two browsers on the same room state, while the cooperative maze must track movement, resources, and shared progress.",
+      "The project started as a single snakes-and-ladders game. As I added more games, I needed a shared system for rooms, players, and chat, while keeping each game’s rules separate.\n\nBoth browsers also needed the same current state. Quiz answers had to stay hidden until both players submitted, turn-based games had to track the active player, and the maze needed to save shared resources and progress.",
     solution:
       "I separated the shared multiplayer system from the individual game engines.\n\nNext.js handles the interface and server-side operations. A common platform layer manages rooms, players, chat, game selection, and session status. Each game module owns its own rules, state transitions, and UI.\n\nDrizzle maps the data model to Neon Postgres. Stable data such as room identity, players, messages, turns, and status uses relational columns. Game-specific state is stored as JSONB because the board game, quizzes, streak game, and maze require different data structures.",
     outcome:
-      "The production application now supports five playable experiences through one room flow. A new game can reuse the existing room, player, chat, and deployment infrastructure instead of rebuilding those concerns from the beginning.\n\nThe application is deployed on Vercel with Neon Postgres. A production smoke test successfully created a room, loaded the game board, and confirmed that its data remained available after a full page reload.",
+      "The app has five playable games using the same room, player, and chat system. New games can reuse that foundation.\n\nI deployed it on Vercel with Neon Postgres. A production smoke test covered creating a room, loading the board, and checking that its data remained available after a page reload.",
     metrics: [
       { value: "5", label: "Playable game modes" },
       { value: "2", label: "Players in each room" },
@@ -92,22 +91,22 @@ export const projects: PortfolioProject[] = [
       overview: [
         { label: "Product", value: "Private two-player game platform" },
         { label: "Role", value: "Product design, system architecture, and full-stack engineering" },
-        { label: "Delivery", value: "Independent product deployed on Vercel" },
+        { label: "Delivery", value: "Personal project, deployed on Vercel" },
       ],
       highlights: [
         {
           number: "01",
-          title: "Private rooms without user accounts",
+          title: "Join a private room",
           text: "A host chooses a game, enters a nickname, and receives a room code to share. The second player joins from another browser without creating an account. Both clients connect to the same room record and persisted game session.",
         },
         {
           number: "02",
-          title: "Five games on one shared platform",
+          title: "Choose from five games",
           text: "The catalog includes a story-led board game, two hidden-answer couple quizzes, a choice-and-streak game, and a cooperative 7×7 maze. A game registry connects each catalog entry to an isolated game module, while room and chat behavior stays shared.",
         },
         {
           number: "03",
-          title: "Mechanics designed for two players",
+          title: "Keep both players in sync",
           text: "Hidden-answer games store each submission separately and reveal the result only when both players are ready. Turn-based games persist the active player and current state. The maze adds shared resources, protective abilities, and cooperative progress without requiring a separate multiplayer foundation.",
         },
       ],
@@ -121,8 +120,8 @@ export const projects: PortfolioProject[] = [
           text: "Rooms, players, turns, and messages have predictable structures, so they use relational fields. JSONB stores the parts that vary between games. This avoids forcing five different rule systems into one rigid schema.",
         },
         {
-          title: "Use server-backed state without mandatory accounts",
-          text: "A room code and player identity provide enough context for a short private session. Removing account creation reduces onboarding friction, while the server still keeps both players connected to the same persisted state.",
+          title: "Save sessions without requiring accounts",
+          text: "Players join with a room code and nickname. The server stores the session state so both browsers use the same room data.",
         },
         {
           title: "Test reusable game behavior",
@@ -147,22 +146,22 @@ export const projects: PortfolioProject[] = [
     title: "ITP Practice Lab",
     shortTitle: "ITP Practice",
     category: "Full-stack learning platform",
-    label: "Live independent product",
+    label: "Independent project",
     summary:
-      "An independent TOEFL ITP practice platform with secure accounts, focused practice sessions, a timed full simulation, progress history, and answer review.",
+      "An independent TOEFL ITP practice app with 140 original questions, timed sections, saved answers, and review explanations. I built the interface, authentication, and database workflow.",
     challenge:
-      "Independent learners need more than a static question list: they need realistic section timing, saved progress, clear explanations, and an honest distinction between practice results and official TOEFL scoring.",
+      "I wanted learners to practise individual sections, complete a timed simulation, and return to saved answers. The app also needed to explain results clearly and distinguish practice feedback from official TOEFL scores.",
     solution:
       "I developed a full-stack Next.js application with original question content, section-specific practice, a server-enforced 115-minute simulation, Neon/PostgreSQL persistence, scrypt password hashing, HttpOnly sessions, and post-test review.",
     outcome:
-      "The deployed product covers registration, focused practice, full simulation, autosaved answers, progress history, section summaries, and detailed explanations. A production smoke test confirmed that an answer remained selected after a full page reload.",
+      "Learners can create an account, choose a practice session or full simulation, and review their answers afterwards. The app saves answers, progress, and section results. A production smoke test confirmed that a saved answer stayed selected after a page reload.",
     metrics: [
       { value: "140", label: "Original practice questions" },
       { value: "3", label: "Test sections" },
       { value: "115m", label: "Full simulation" },
     ],
     stack: ["Next.js", "TypeScript", "Neon Postgres", "Node.js", "Web Speech API"],
-    services: ["Product architecture", "Secure authentication", "Assessment workflow", "Data migration & deployment"],
+    services: ["Product architecture", "Authentication", "Assessment workflow", "Data migration & deployment"],
     accent: "cyan",
     kind: "repository",
     repositoryName: "JackButler99/LearnToefl",
@@ -179,18 +178,18 @@ export const projects: PortfolioProject[] = [
       highlights: [
         {
           number: "01",
-          title: "Practice for focus, simulation for rhythm",
+          title: "Choose a short practice or a full simulation",
           text: "Learners can choose a short untimed set for one section or complete all 140 questions through separately timed Listening, Structure, and Reading sections.",
         },
         {
           number: "02",
-          title: "Progress survives the session",
+          title: "Saved answers and progress",
           text: "Accounts, attempts, answers, section state, and deadlines are stored in PostgreSQL. A learner can leave a practice session, return later, and continue from saved work.",
         },
         {
           number: "03",
-          title: "Useful feedback without false authority",
-          text: "Review screens explain original practice questions and report raw results, while the product clearly avoids presenting percentages as an official ETS scaled score or certificate.",
+          title: "Review answers and explanations",
+          text: "The review screen shows correct answers, explanations, and practice results. Results are reported as raw scores and percentages, with no official ETS score or certificate.",
         },
       ],
       decisions: [
@@ -199,22 +198,22 @@ export const projects: PortfolioProject[] = [
           text: "The database stores section deadlines and the server controls section transitions, preventing a refreshed browser or edited client timer from reopening completed sections.",
         },
         {
-          title: "Treat scoring boundaries as a product feature",
-          text: "The interface distinguishes independent practice from certification and does not invent a 310–677 score from an uncalibrated question bank.",
+          title: "Report practice results accurately",
+          text: "The app reports correct-answer counts and percentages. The original question bank has not been calibrated to produce an official 310–677 scaled score.",
         },
         {
-          title: "Move persistence from local SQLite to serverless Postgres",
-          text: "The production branch replaces ephemeral local-file storage with Neon and an idempotent schema initializer, making accounts and attempts durable across Vercel function instances.",
+          title: "Use PostgreSQL for the Vercel deployment",
+          text: "I moved the production branch from local SQLite files to Neon PostgreSQL and added an idempotent schema initializer. Accounts and attempts are shared across Vercel function instances.",
         },
         {
-          title: "Keep authentication small and inspectable",
+          title: "Hash passwords and session tokens",
           text: "Passwords use per-user salts and scrypt hashes; sessions store token hashes server-side and reach the browser through HttpOnly cookies.",
         },
       ],
       validation: [
         "TypeScript checking and a production Next.js build passed before deployment.",
         "The live smoke test covered registration, practice creation, answer saving, and persistence after reload.",
-        "The deployed feature branch uses a Production-only DATABASE_URL secret linked to Neon.",
+        "Configured the Vercel production deployment to use Neon PostgreSQL.",
       ],
       nextSteps: [
         "Replace browser speech synthesis with reviewed, properly licensed human-recorded audio.",
@@ -229,11 +228,11 @@ export const projects: PortfolioProject[] = [
     title: "Physics Studio",
     shortTitle: "Physics Studio",
     category: "Interactive physics learning platform",
-    label: "Live independent product",
+    label: "Independent project",
     summary:
-      "An interactive physics learning platform combining guided courses, numerical simulations, structured practice, and technical explanations across seven physics topic areas.",
+      "An interactive physics app with guided lessons, simulations, and practice across seven topic areas. The web interface connects to separate services for lesson content and physics calculations.",
     challenge:
-      "Physics software needs to do more than animate diagrams. The application had to connect mathematical models, explanations, experiments, questions, and saved learner progress without presenting simplified simulations as complete physical reality.\n\nThe larger engineering challenge was coordinating a Next.js interface with separate curriculum and physics services. Interactive animations needed immediate browser-side performance, while lesson content, answer checking, and reference calculations still required clear server boundaries and consistent model constraints.",
+      "I wanted the lessons to connect mathematical explanations, experiments, practice questions, and saved progress. Each simulation also needed to state the assumptions and limits of its physical model.\n\nThe browser animations needed to respond to changes immediately. Lesson content, answer checking, and reference calculations ran in separate services, which had to use the same model constraints as the interface.",
     solution:
       "I structured Physics Studio as a TypeScript monorepo containing a Next.js web application, separate curriculum and physics services, shared runtime contracts, and a reusable numerical physics package.\n\nThe browser imports the same physics kernel used by the calculation service, keeping interactive experiments and server-generated reference values consistent. Canvas animation runs through requestAnimationFrame outside React’s render cycle, while throttled readouts prevent simulation updates from causing unnecessary component renders.\n\nNext.js Route Handlers connect the interface to the curriculum and physics services. KaTeX renders equations with accessible MathML, browser storage preserves course progress and reasoning notes, and Docker Compose provides a reproducible three-process deployment environment.",
     outcome:
@@ -282,9 +281,9 @@ export const projects: PortfolioProject[] = [
       highlights: [
         {
           number: "01",
-          title: "Guided learning beyond isolated simulations",
+          title: "Lessons with experiments and practice",
           text:
-            "Courses connect prediction, experimentation, mathematical explanation, calculation practice, and review. Learners can record observations and export their reasoning instead of only adjusting animation controls.",
+            "Learners make predictions, adjust a simulation, work through the equations, and answer questions. They can record observations and export notes for later review.",
         },
         {
           number: "02",
@@ -301,9 +300,9 @@ export const projects: PortfolioProject[] = [
       ],
       decisions: [
         {
-          title: "Use explicit service boundaries",
+          title: "Separate lessons from calculations",
           text:
-            "The web application does not own answer keys or reference calculations. Curriculum and physics responsibilities remain in separate processes, connected through documented HTTP contracts.",
+            "The curriculum service handles lessons and answer checking; the physics service handles reference calculations. The web application calls both through documented HTTP contracts.",
         },
         {
           title: "Share the physics kernel",
@@ -316,16 +315,16 @@ export const projects: PortfolioProject[] = [
             "Canvas playback uses requestAnimationFrame while interface readouts update at a lower frequency. Hidden tabs stop time advancement, and reduced-motion preferences start experiments paused.",
         },
         {
-          title: "Expose assumptions and limitations",
+          title: "Document each model’s assumptions",
           text:
-            "Each model describes its units, approximations, parameter limits, and physical assumptions. The product presents practice evidence without claiming validated mastery or complete classroom readiness.",
+            "Each model lists its units, approximations, parameter ranges, and assumptions. Progress indicators record practice activity; learning effectiveness still needs educator and learner review.",
         },
       ],
       validation: [
         "Tested energy conservation, wave limits, Maxwell-distribution normalization, quantum boundary conditions, relativistic calculations, and invalid parameter handling.",
         "Used simulated-DOM tests for guided activities, playback controls, saved progress, keyboard interaction, and API-failure recovery.",
         "Ran TypeScript checking, production builds, and HTTP integration checks across the web, curriculum, and physics processes.",
-        "Confirmed successful deployment through the connected Vercel project while keeping browser visual review as a separate manual check.",
+        "Confirmed the Vercel deployment. Browser layout and accessibility still need a separate visual review.",
       ],
       nextSteps: [
         "Add accounts and a durable backend for synchronized learner progress across devices.",
@@ -341,9 +340,9 @@ export const projects: PortfolioProject[] = [
     "title": "Signal Market Lab",
     "shortTitle": "Market Lab",
     "category": "Interactive forecasting and market research",
-    "label": "Live independent product",
-    "summary": "A market research app where visitors run forecast experiments, compare two models, and explore financial evidence for stocks, forex, and Bitcoin. The public demo combines scheduled market snapshots with browser-based calculations and private CSV imports.",
-    "challenge": "I wanted the app to make a forecast understandable: which data it used, how far ahead it predicted, and whether it improved on simply repeating the last price. Stocks, currencies, and Bitcoin also needed different explanations of their fundamental data.\n\nThe first version used a Python API, SQLite, and background workers. Making that workflow available as a public demo introduced another constraint: visitors needed to run experiments without relying on a continuously running server or exposing provider credentials.",
+    "label": "Independent project",
+    "summary": "A market research dashboard for exploring prices, running forecasts, and comparing models. It combines Python data workflows with a Next.js demo where visitors can import CSV files and run calculations in their browser.",
+    "challenge": "I wanted people to be able to inspect a forecast: the data behind it, the prediction horizon, and whether it improved on repeating the last price. Stocks, currencies, and Bitcoin also needed different explanations of their fundamental data.\n\nThe first version used a Python API, SQLite, and background workers. For the public demo, I needed visitors to run experiments without an always-on application server or access to provider credentials.",
     "solution": "I built the initial research engine in Python, with versioned datasets, CSV validation, walk-forward backtesting, and saved experiments in SQLite. It compares a rolling 30-observation log-linear trend with a last-price naive model, reporting MAE over the same evaluation dates and observation horizon.\n\nFor v2, I separated data refresh from visitor computation. GitHub Actions fetches provider data on a six-hour schedule and publishes normalized JSON snapshots. Next.js on Vercel serves those snapshots, while TypeScript calculates visitor experiments in the browser. CSV imports remain on the visitor's device, along with up to 20 saved experiments and the datasets needed to replay them.\n\nThe interface starts with historical prices. Run experiment reveals the forecast, backtest metrics, and completion status; Compare models evaluates both models on the same dataset. A separate fundamentals workspace uses charts, source dates, mathematical notation, and Beginner, Intermediate, and Expert explanations tailored to each asset class.",
     "outcome": "The v2 workflow supports AAPL, MSFT, EURUSD, and BTCUSD price research through one interface. Visitors can change models and horizons, run their own calculations, import CSVs, and replay saved experiments without changing the shared public data.\n\nThe deployment no longer requires an always-on application backend. Scheduled refreshes retain the last successful data when a provider fails, and credentials stay in GitHub Actions. The local Python and SQLite workflow remains available. The EURUSD fundamental feed still needs an upstream FRED error resolved; its price-data workflow is separate.",
     "metrics": [
@@ -410,7 +409,7 @@ export const projects: PortfolioProject[] = [
         },
         {
           "number": "03",
-          "title": "Explain fundamentals in the right context",
+          "title": "Explore the data behind each asset",
           "text": "Separate modules interpret company financial statements, the two economies behind EURUSD, and Bitcoin network activity. Reading levels, a glossary, charts, and source evidence help users move from a plain-language explanation to the underlying figures. These explanations do not enter the price forecasting model."
         }
       ],
@@ -424,11 +423,11 @@ export const projects: PortfolioProject[] = [
           "text": "GitHub Actions performs finite refresh jobs; Vercel reads the published snapshots; the visitor's browser runs experiments. This removed the need for an always-on backend in the public demo while preserving the local Python research workflow. The six-hour refresh schedule is best effort, not a real-time feed."
         },
         {
-          "title": "Treat dataset identity as part of the result",
+          "title": "Save the dataset with each experiment",
           "text": "Results are tied to the asset, dataset version, model, and horizon. Changing the selection hides the previous output. Saved browser experiments retain their original observations, and stock replays preserve published exchange-calendar dates."
         },
         {
-          "title": "Make missing or delayed evidence visible",
+          "title": "Show data dates and refresh failures",
           "text": "Provider data carries source and observation dates. A failed refresh preserves available prior snapshots and exposes a safe diagnostic category. Missing observations remain unavailable; the scheduled public workflow does not substitute synthetic prices when a fetch fails."
         }
       ],
@@ -439,7 +438,7 @@ export const projects: PortfolioProject[] = [
         "Ran TypeScript checks and backend regression tests during development, and added GitHub Actions checks for backend tests, browser-demo tests, and the frontend production build."
       ],
       "nextSteps": [
-        "Add more indexes, forex pairs, and more sophisticated models into the system.",
+        "Add more market indexes and forex pairs, then compare additional models against the existing baseline.",
         "Add an untouched final evaluation window before extending the forecasting models or making stronger performance claims.",
         "Move heavier browser calculations into a Web Worker as dataset sizes and model complexity grow.",
         "Complete browser-based usability, accessibility, and responsive-layout checks for the public experiment flow."
@@ -453,17 +452,17 @@ export const projects: PortfolioProject[] = [
     category: "Data product concept",
     label: "Concept case study",
     summary:
-      "A customer-health analytics concept that turns behavioral data into explainable risk signals and practical next actions.",
+      "A proposal for a customer analytics dashboard that uses product usage data to flag accounts that may need attention.",
     challenge:
-      "Customer teams can have plenty of usage data but no dependable way to identify accounts needing attention. A useful solution must be accurate, interpretable, and simple to act on.",
+      "This concept explores how a customer success team could use product usage data to identify accounts that may need attention and understand the reasons behind each flag.",
     solution:
-      "A proposed Python pipeline for feature preparation and model evaluation, paired with a web dashboard that explains risk drivers instead of showing a black-box score.",
+      "The proposed design uses Python to prepare usage features and evaluate models. A web dashboard would show each account’s risk score and the factors behind it.",
     outcome:
-      "This concept is ready to be developed against a real dataset and validated with measurable model performance and a clearly defined customer-success decision.",
+      "This is a concept, with no deployed app or validated model yet. The next step is to obtain a dataset, define the customer-success decision, and evaluate model performance.",
     metrics: [
-      { value: "01", label: "Explainable risk score" },
-      { value: "24h", label: "Pipeline refresh target" },
-      { value: "A/B", label: "Model comparison" },
+      { value: "01", label: "Proposed risk score" },
+      { value: "24h", label: "Target refresh interval" },
+      { value: "A/B", label: "Planned model comparison" },
     ],
     stack: ["Python", "Pandas", "scikit-learn", "FastAPI", "Next.js"],
     services: ["Data exploration", "Model development", "API integration", "Analytics UI"],
@@ -477,20 +476,20 @@ export const projects: PortfolioProject[] = [
     slug: "demandcast-forecasting",
     number: "06",
     title: "DemandCast",
-    category: "Forecasting system",
+    category: "Demand forecasting concept",
     label: "Concept case study",
     summary:
-      "A forecasting workflow that helps a retail team compare demand scenarios, monitor model drift, and plan with clearer uncertainty.",
+      "A proposed demand forecasting tool for comparing retail sales scenarios, reviewing uncertainty, and tracking model performance.",
     challenge:
-      "Planning decisions rely on manual estimates and a single unexplained forecast. The team needs a repeatable process that makes uncertainty and model performance visible.",
+      "This concept explores how a retail team could compare forecasts by product and region, understand uncertainty, and track model performance.",
     solution:
-      "A time-series evaluation pipeline with backtesting, baseline comparison, and a lightweight planning interface for reviewing forecasts by product and region.",
+      "The proposed system would combine a forecasting pipeline with backtesting, baseline comparison, and a web interface for reviewing forecasts by product and region.",
     outcome:
-      "This concept is ready to be implemented with a real retail dataset, then evaluated against a documented baseline, forecast horizon, and planning decision.",
+      "The design needs a real retail dataset, an agreed forecast horizon, and a baseline for evaluation. Model performance and its usefulness for planning still need to be tested.",
     metrics: [
-      { value: "MAPE", label: "Tracked by segment" },
-      { value: "3", label: "Forecast scenarios" },
-      { value: "Auto", label: "Backtesting workflow" },
+      { value: "MAPE", label: "Proposed error metric" },
+      { value: "3", label: "Planned forecast scenarios" },
+      { value: "Auto", label: "Planned backtesting" },
     ],
     stack: ["Python", "SQL", "Time series", "FastAPI", "React"],
     services: ["Data cleaning", "Forecast evaluation", "API development", "Decision interface"],
@@ -507,46 +506,46 @@ export const services = [
     number: "01",
     title: "Full-stack web development",
     description:
-      "Production-ready web applications with thoughtful interfaces, clear backend boundaries, and data models built for change.",
+      "I build web applications with React and Next.js, including the APIs, database, and user accounts behind the interface.",
     deliverables: [
-      "Responsive frontend implementation",
-      "API and database architecture",
-      "Authentication and role-based access",
-      "Testing, deployment, and handoff",
+      "Responsive pages and application screens",
+      "APIs and database integration",
+      "User accounts and access controls",
+      "Tests, deployment, and setup notes",
     ],
-    bestFor: "MVPs, SaaS products, internal tools, and platform modernization.",
+    bestFor: "MVPs, learning platforms, multiplayer apps, and internal tools.",
   },
   {
     number: "02",
-    title: "Data science & analytics",
+    title: "Data analysis & forecasting",
     description:
-      "Reliable analysis and models that connect to a real decision—not notebooks that stop before the work becomes useful.",
+      "I use Python and SQL to prepare datasets, compare models, and explain the results. The starting point is a specific question the analysis needs to answer.",
     deliverables: [
-      "Exploratory analysis and data quality review",
-      "Feature engineering and model evaluation",
-      "Forecasting or classification workflows",
-      "Clear findings and reproducible code",
+      "Dataset cleaning and validation",
+      "Exploratory analysis",
+      "Forecast backtesting and baseline comparisons",
+      "Reproducible scripts and a written explanation",
     ],
-    bestFor: "Forecasting, customer analytics, operational insights, and model prototypes.",
+    bestFor: "Research tools, forecasting prototypes, and data quality reviews.",
   },
   {
     number: "03",
-    title: "Data-powered product engineering",
+    title: "Dashboards & data tools",
     description:
-      "The bridge between both disciplines: turning a model, dataset, or manual report into a usable web product.",
+      "I turn datasets and analysis scripts into web interfaces where people can explore results, compare scenarios, or run their own calculations.",
     deliverables: [
-      "Model-serving APIs",
-      "Interactive dashboards and reporting",
-      "Data pipelines and scheduled workflows",
-      "Monitoring and maintainable documentation",
+      "APIs for data and calculations",
+      "Interactive charts and dashboards",
+      "Scheduled data refreshes",
+      "CSV imports and exports",
     ],
-    bestFor: "Teams that need their data work shipped inside a dependable product.",
+    bestFor: "Dashboards, research tools, and applications that use an existing dataset or model.",
   },
 ];
 
 export const skillGroups = [
   {
-    title: "Product & frontend",
+    title: "Frontend",
     skills: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Responsive UI", "Accessibility"],
   },
   {
@@ -554,7 +553,7 @@ export const skillGroups = [
     skills: ["Node.js", "Python", "REST APIs", "PostgreSQL", "Authentication", "Docker"],
   },
   {
-    title: "Data & machine learning",
+    title: "Data & analysis",
     skills: ["Pandas", "SQL", "scikit-learn", "EDA", "Forecasting", "Model evaluation"],
   },
   {
@@ -566,22 +565,22 @@ export const skillGroups = [
 export const processSteps = [
   {
     number: "01",
-    title: "Clarify",
-    text: "We define the user, the decision to improve, and what a successful first release must do.",
+    title: "Define the scope",
+    text: "We agree on the users, required features, existing code, and what the first version needs to do.",
   },
   {
     number: "02",
-    title: "Shape",
-    text: "I map the system, surface risks early, and turn the scope into visible milestones.",
+    title: "Plan the work",
+    text: "I break the scope into milestones and flag dependencies before building.",
   },
   {
     number: "03",
-    title: "Build",
-    text: "You get working increments, concise updates, and room to steer before details harden.",
+    title: "Build and review",
+    text: "I share working features for review and explain what changed, what is pending, and where I need your input.",
   },
   {
     number: "04",
-    title: "Ship",
-    text: "I test the critical path, deploy carefully, and leave the product understandable after handoff.",
+    title: "Test and hand over",
+    text: "I check the main user flows, prepare the deployment, and leave setup notes so you can run and maintain the project.",
   },
 ];

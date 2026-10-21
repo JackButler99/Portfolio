@@ -6,11 +6,11 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: `${profile.name} · Full-Stack & Data/AI Engineer`,
+    default: `${profile.name} · ${profile.role}`,
     template: `%s · ${profile.name}`,
   },
   description:
-    "Full-stack development, data analytics, and machine-learning engineering for useful, dependable digital products.",
+    "Ridho Kurniawan builds web applications with Next.js, TypeScript, PostgreSQL, and Python. Explore his projects, demos, and source code.",
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",

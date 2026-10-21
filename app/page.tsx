@@ -17,14 +17,14 @@ export default function Home() {
         <div className="motion-safe:animate-[enter_600ms_ease_both] max-[1080px]:max-w-[840px]">
           <p className="mb-8 inline-flex items-center gap-2 rounded-md border border-[#cfd8e5] bg-white/80 px-3 py-1.5 font-mono text-xs font-semibold uppercase tracking-[0.04em] text-[#536174]"><span className="size-[7px] rounded-full bg-[#238b6c] shadow-[0_0_0_4px_rgba(35,139,108,0.1)]" aria-hidden="true" />{profile.availability}</p>
           <p className={eyebrow}>{profile.role}</p>
-          <h1 className="mt-4 text-5xl font-bold leading-[0.98] tracking-[-0.055em] sm:text-6xl lg:text-7xl">I build <em className="not-italic text-primary">reliable</em> web products powered by data.</h1>
+          <h1 className="mt-4 text-5xl font-bold leading-[0.98] tracking-[-0.055em] sm:text-6xl lg:text-7xl">I build web apps with <em className="not-italic text-primary">Next.js</em> and Python.</h1>
           <p className="mt-7 max-w-[650px] text-base leading-7 text-ink-soft sm:text-lg">{profile.intro}</p>
           <div className="mt-8 flex flex-wrap gap-3 max-[460px]:grid">
             <Button asChild size="lg">
-              <Link href="/projects">Explore my work</Link>
+              <Link href="/projects">View my projects</Link>
             </Button>
             <Button asChild size="lg" variant="outline">
-              <Link href="/contact">Talk about your project</Link>
+              <a href={profile.upworkUrl} target="_blank" rel="noopener noreferrer">{profile.contactLabel}</a>
             </Button>
           </div>
         </div>
@@ -38,7 +38,7 @@ export default function Home() {
           <span>TypeScript</span><i className="size-1 rounded-full bg-primary" />
           <span>Python</span><i className="size-1 rounded-full bg-primary" />
           <span>PostgreSQL</span><i className="size-1 rounded-full bg-primary" />
-          <span>Machine Learning</span><i className="size-1 rounded-full bg-primary" />
+          <span>Data Analysis</span><i className="size-1 rounded-full bg-primary" />
           <span>API Design</span><i className="size-1 rounded-full bg-primary" />
           <span>Data Products</span>
         </div>
@@ -48,9 +48,9 @@ export default function Home() {
         <div className="mb-12 grid grid-cols-[minmax(0,1.2fr)_minmax(280px,0.65fr)] items-end gap-[clamp(48px,7vw,88px)] max-[760px]:mb-10 max-[760px]:grid-cols-1 max-[760px]:gap-6">
           <div>
             <p className={eyebrow}>Selected work</p>
-            <h2 className={cn(sectionTitle, "mt-4")}>Useful software, seen from both sides.</h2>
+            <h2 className={cn(sectionTitle, "mt-4")}>A closer look at my projects.</h2>
           </div>
-          <p className="m-0 border-l-2 border-[#c9d6f7] pl-6 text-base leading-7 text-ink-soft max-[760px]:border-l-0 max-[760px]:border-t-2 max-[760px]:pt-4 max-[760px]:pl-0">Repository-backed applications alongside clearly labeled data-product concepts, with the decisions and engineering behind each one.</p>
+          <p className="m-0 border-l-2 border-[#c9d6f7] pl-6 text-base leading-7 text-ink-soft max-[760px]:border-l-0 max-[760px]:border-t-2 max-[760px]:pt-4 max-[760px]:pl-0">These are independent projects I’ve designed and built. Each case study explains the features, technical choices, and checks behind the application.</p>
         </div>
         <div className="grid grid-cols-2 gap-5 max-[760px]:grid-cols-1">
           {projects.slice(0, 4).map((project) => (
@@ -67,9 +67,9 @@ export default function Home() {
           <div className="mb-12 grid grid-cols-[minmax(0,1.2fr)_minmax(280px,0.65fr)] items-end gap-[clamp(48px,7vw,88px)] max-[760px]:mb-10 max-[760px]:grid-cols-1 max-[760px]:gap-6">
             <div>
               <p className={eyebrow}>Ways I can help</p>
-              <h2 className={cn(sectionTitle, "mt-4")}>One partner across product and data.</h2>
+              <h2 className={cn(sectionTitle, "mt-4")}>What I can help you build.</h2>
             </div>
-            <p className="m-0 border-l-2 border-[#c9d6f7] pl-6 text-base leading-7 text-ink-soft max-[760px]:border-l-0 max-[760px]:border-t-2 max-[760px]:pt-4 max-[760px]:pl-0">Bring me a defined build or an ambiguous operational problem. I’ll help turn it into a sensible technical plan and a working result.</p>
+            <p className="m-0 border-l-2 border-[#c9d6f7] pl-6 text-base leading-7 text-ink-soft max-[760px]:border-l-0 max-[760px]:border-t-2 max-[760px]:pt-4 max-[760px]:pl-0">I can build a web application, add a feature to an existing project, or turn a dataset into an interactive tool. The services below cover the kinds of work I take on.</p>
           </div>
           <div className="border-t border-[#cfd8e3]">
             {services.map((service) => (
@@ -82,7 +82,7 @@ export default function Home() {
             ))}
           </div>
           <Button asChild variant="outline" className="mt-7">
-            <Link href="/services">Explore services</Link>
+            <Link href="/services">View services</Link>
           </Button>
         </div>
       </section>
@@ -90,10 +90,10 @@ export default function Home() {
       <section className={cn(shell, sectionSpacing)}>
         <div className="mb-12 grid grid-cols-[minmax(0,1.2fr)_minmax(280px,0.65fr)] items-end gap-[clamp(48px,7vw,88px)] max-[760px]:mb-10 max-[760px]:grid-cols-1 max-[760px]:gap-6">
           <div>
-            <p className={eyebrow}>A low-friction process</p>
-            <h2 className={cn(sectionTitle, "mt-4")}>Clear steps. Visible progress.</h2>
+            <p className={eyebrow}>How I work</p>
+            <h2 className={cn(sectionTitle, "mt-4")}>From a project brief to a working application.</h2>
           </div>
-          <p className="m-0 border-l-2 border-[#c9d6f7] pl-6 text-base leading-7 text-ink-soft max-[760px]:border-l-0 max-[760px]:border-t-2 max-[760px]:pt-4 max-[760px]:pl-0">You should always know what is being built, what changed, and what decision comes next.</p>
+          <p className="m-0 border-l-2 border-[#c9d6f7] pl-6 text-base leading-7 text-ink-soft max-[760px]:border-l-0 max-[760px]:border-t-2 max-[760px]:pt-4 max-[760px]:pl-0">We start by agreeing on the scope. I then break the work into milestones so you can review features as they’re built.</p>
         </div>
         <ol className="m-0 grid grid-cols-4 border-y border-[#d5dde7] p-0 max-[1080px]:grid-cols-2 max-[760px]:grid-cols-1">
           {processSteps.map((step) => (

@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Services",
-  description: "Full-stack development, data science, and data-powered product engineering services.",
+  description: "Web application development, data analysis, forecasting, and interactive dashboards by Ridho Kurniawan.",
 };
 
 export default function ServicesPage() {
@@ -16,8 +16,8 @@ export default function ServicesPage() {
     <main id="main-content">
       <PageHero
         eyebrow="Services"
-        title="Engineering that connects the interface to the outcome."
-        description="Choose a focused engagement or combine disciplines for an end-to-end product. Scope, milestones, and handoff stay clear from the beginning."
+        title="Web development and data tools."
+        description="I can help with a complete application or a specific part of an existing project. We’ll agree on the scope, deliverables, and first milestone before work starts."
       />
       <section className={cn(shell, sectionSpacing, "pt-10")}>
         {services.map((service) => (
@@ -43,9 +43,9 @@ export default function ServicesPage() {
         <div className="mb-12 grid grid-cols-[minmax(0,1.2fr)_minmax(280px,0.65fr)] items-end gap-[clamp(48px,7vw,88px)] max-[760px]:grid-cols-1 max-[760px]:gap-6">
           <div>
             <p className={eyebrow}>How we work</p>
-            <h2 className={cn(sectionTitle, "mt-4")}>A practical path from ambiguity to release.</h2>
+            <h2 className={cn(sectionTitle, "mt-4")}>How a project gets started.</h2>
           </div>
-          <p className="m-0 border-l-2 border-[#c9d6f7] pl-6 text-base leading-7 text-ink-soft max-[760px]:border-l-0 max-[760px]:border-t-2 max-[760px]:pt-4 max-[760px]:pl-0">Each engagement is shaped around the smallest meaningful outcome, then delivered in reviewable increments.</p>
+          <p className="m-0 border-l-2 border-[#c9d6f7] pl-6 text-base leading-7 text-ink-soft max-[760px]:border-l-0 max-[760px]:border-t-2 max-[760px]:pt-4 max-[760px]:pl-0">Send me a brief through Upwork with your goals, current stack, and timeline. I’ll help identify what needs to be built and how to break up the work.</p>
         </div>
         <ol className="m-0 grid grid-cols-4 border-y border-[#d5dde7] p-0 max-[1080px]:grid-cols-2 max-[760px]:grid-cols-1">
           {processSteps.map((step) => (

@@ -101,7 +101,7 @@ export function ProjectCard({ project }: { project: PortfolioProject }) {
                 rel="noreferrer"
                 aria-label={`Open ${project.title} live application`}
               >
-                <span className="max-[420px]:sr-only">Live</span>
+                <span className="max-[420px]:sr-only">Demo</span>
                 <ArrowUpRight className="size-4" aria-hidden="true" />
               </a>
             ) : null}

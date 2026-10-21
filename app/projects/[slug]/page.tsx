@@ -65,7 +65,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               {project.liveUrl ? (
                 <Button asChild size="lg">
                   <a href={project.liveUrl} target="_blank" rel="noreferrer">
-                    Try the live app <ArrowUpRight aria-hidden="true" />
+                    Try the demo <ArrowUpRight aria-hidden="true" />
                   </a>
                 </Button>
               ) : null}
@@ -100,7 +100,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   className={cn("object-cover object-top", project.slug === "learn-toefl" && "object-bottom", isMarketLab && "scale-[0.96] object-contain object-center transition-transform duration-500 ease-out group-hover:scale-100")}
                 />
                 <div className="pointer-events-none absolute inset-x-[18px] bottom-4 z-10 flex items-center justify-between gap-3 font-mono text-xs font-bold uppercase tracking-[0.06em] text-white">
-                  <span className="inline-flex items-center gap-2"><i className="size-2 rounded-full bg-[#62d6a4] shadow-[0_0_0_4px_rgba(98,214,164,0.18)]" aria-hidden="true" /> Live product</span>
+                  <span className="inline-flex items-center gap-2"><i className="size-2 rounded-full bg-[#62d6a4] shadow-[0_0_0_4px_rgba(98,214,164,0.18)]" aria-hidden="true" /> Live demo</span>
                   <span className="max-[460px]:hidden">Open in browser</span>
                 </div>
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-b from-transparent to-[rgba(13,18,26,0.74)]" aria-hidden="true" />
@@ -128,7 +128,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       {project.kind === "concept" ? (
         <section className={cn(shell, "mt-12 flex items-center gap-5 rounded-[10px] border border-[#cbd8f8] bg-[#edf2ff] px-5 py-4 max-[760px]:grid max-[760px]:gap-1.5")} aria-label="Concept project notice">
           <strong className="shrink-0 font-mono text-xs font-extrabold uppercase tracking-[0.07em] text-blue-dark">Concept case study</strong>
-          <p className="m-0 text-sm text-[#596981]">This project demonstrates the proposed product and technical approach; it is not presented as a shipped client engagement.</p>
+          <p className="m-0 text-sm text-[#596981]">This is a project proposal. The features and architecture below describe what I would build and test with a real dataset.</p>
         </section>
       ) : null}
 
@@ -147,7 +147,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               </dl>
             </>
           ) : null}
-          <span className={eyebrow}>Contribution</span>
+          <span className={eyebrow}>{project.kind === "concept" ? "Proposed work" : "My contribution"}</span>
           <ul className="mb-7 mt-4 grid gap-3 border-y border-border py-5">
             {project.services.map((service) => (
               <li className="flex items-start gap-2.5 text-sm text-ink-soft" key={service}><Check className="mt-1 size-4 shrink-0 text-primary" aria-hidden="true" />{service}</li>
@@ -164,7 +164,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             {project.liveUrl ? (
               <Button asChild variant="outline">
                 <a href={project.liveUrl} target="_blank" rel="noreferrer">
-                  Open live app <ArrowUpRight aria-hidden="true" />
+                  Open demo <ArrowUpRight aria-hidden="true" />
                 </a>
               </Button>
             ) : null}
@@ -176,12 +176,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <div className="grid gap-20 lg:gap-28">
           <article>
             <span className="font-mono text-sm font-extrabold uppercase tracking-[0.08em] text-primary">01 / Context</span>
-            <h2 className="mb-5 mt-3 text-4xl font-bold leading-[1.05] tracking-[-0.045em] sm:text-5xl">The challenge</h2>
+            <h2 className="mb-5 mt-3 text-4xl font-bold leading-[1.05] tracking-[-0.045em] sm:text-5xl">The problem</h2>
             <CaseParagraphs content={project.challenge} />
           </article>
           <article>
             <span className="font-mono text-sm font-extrabold uppercase tracking-[0.08em] text-primary">02 / Approach</span>
-            <h2 className="mb-5 mt-3 text-4xl font-bold leading-[1.05] tracking-[-0.045em] sm:text-5xl">The solution</h2>
+            <h2 className="mb-5 mt-3 text-4xl font-bold leading-[1.05] tracking-[-0.045em] sm:text-5xl">{project.kind === "concept" ? "Proposed approach" : "How I built it"}</h2>
             <CaseParagraphs content={project.solution} />
           </article>
 
@@ -189,7 +189,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <section className="grid gap-8" aria-labelledby="case-highlights-heading">
               <div>
                 <span className="font-mono text-sm font-extrabold uppercase tracking-[0.08em] text-primary">03 / Product highlights</span>
-                <h2 className="mt-3 max-w-[760px] text-4xl font-bold leading-[1.05] tracking-[-0.045em] sm:text-5xl" id="case-highlights-heading">What makes it useful</h2>
+                <h2 className="mt-3 max-w-[760px] text-4xl font-bold leading-[1.05] tracking-[-0.045em] sm:text-5xl" id="case-highlights-heading">How people use it</h2>
               </div>
               <div className="grid gap-3">
                 {project.caseStudy.highlights.map((highlight) => (
@@ -213,7 +213,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </div>
           <article>
             <span className="font-mono text-sm font-extrabold uppercase tracking-[0.08em] text-primary">{project.caseStudy ? "04" : "03"} / Evidence</span>
-            <h2 className="mb-5 mt-3 text-4xl font-bold leading-[1.05] tracking-[-0.045em] sm:text-5xl">The outcome</h2>
+            <h2 className="mb-5 mt-3 text-4xl font-bold leading-[1.05] tracking-[-0.045em] sm:text-5xl">{project.kind === "concept" ? "What needs validation" : "What the app does now"}</h2>
             <CaseParagraphs content={project.outcome} />
           </article>
 
@@ -222,7 +222,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               <section className="grid gap-8" aria-labelledby="case-decisions-heading">
                 <div>
                   <span className="font-mono text-sm font-extrabold uppercase tracking-[0.08em] text-primary">05 / Engineering decisions</span>
-                  <h2 className="mt-3 max-w-[760px] text-4xl font-bold leading-[1.05] tracking-[-0.045em] sm:text-5xl" id="case-decisions-heading">Why it was built this way</h2>
+                  <h2 className="mt-3 max-w-[760px] text-4xl font-bold leading-[1.05] tracking-[-0.045em] sm:text-5xl" id="case-decisions-heading">Technical choices</h2>
                 </div>
                 <div className="grid border-t border-border">
                   {project.caseStudy.decisions.map((decision, index) => (
@@ -240,7 +240,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               <section className="grid gap-4" aria-label="Validation and next steps">
                 <article className="grid grid-cols-[minmax(130px,0.48fr)_minmax(190px,0.72fr)_minmax(0,1.3fr)] items-start gap-6 rounded-2xl border border-[#d7dfe8] bg-white p-8 shadow-[var(--shadow-sm)] max-[1080px]:grid-cols-[minmax(170px,0.75fr)_minmax(0,1.25fr)] max-[760px]:grid-cols-1 max-[760px]:gap-3">
                   <span className="pt-1 font-mono text-sm font-extrabold uppercase tracking-[0.08em] text-primary">06 / Validation</span>
-                  <h2 className="text-3xl font-bold leading-tight tracking-[-0.04em] max-[1080px]:col-start-1 max-[1080px]:row-start-2 max-[760px]:row-start-2">What I verified</h2>
+                  <h2 className="text-3xl font-bold leading-tight tracking-[-0.04em] max-[1080px]:col-start-1 max-[1080px]:row-start-2 max-[760px]:row-start-2">Checks I ran</h2>
                   <ul className="grid gap-4 p-0 max-[1080px]:col-start-2 max-[1080px]:row-span-2 max-[1080px]:row-start-1 max-[760px]:col-start-1 max-[760px]:row-span-1 max-[760px]:row-start-3">
                     {project.caseStudy.validation.map((item) => (
                       <li className="flex items-start gap-3 text-sm leading-6 text-ink-soft" key={item}><Check className="mt-1 size-4 shrink-0 text-[#218567]" aria-hidden="true" />{item}</li>
@@ -249,7 +249,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 </article>
                 <article className="grid grid-cols-[minmax(130px,0.48fr)_minmax(190px,0.72fr)_minmax(0,1.3fr)] items-start gap-6 rounded-2xl border border-[#d7dfe8] bg-[#f6f2eb] p-8 shadow-[var(--shadow-sm)] max-[1080px]:grid-cols-[minmax(170px,0.75fr)_minmax(0,1.25fr)] max-[760px]:grid-cols-1 max-[760px]:gap-3">
                   <span className="pt-1 font-mono text-sm font-extrabold uppercase tracking-[0.08em] text-primary">07 / Next iteration</span>
-                  <h2 className="text-3xl font-bold leading-tight tracking-[-0.04em] max-[1080px]:col-start-1 max-[1080px]:row-start-2 max-[760px]:row-start-2">What I would improve next</h2>
+                  <h2 className="text-3xl font-bold leading-tight tracking-[-0.04em] max-[1080px]:col-start-1 max-[1080px]:row-start-2 max-[760px]:row-start-2">Next steps</h2>
                   <ol className="grid gap-4 p-0 max-[1080px]:col-start-2 max-[1080px]:row-span-2 max-[1080px]:row-start-1 max-[760px]:col-start-1 max-[760px]:row-span-1 max-[760px]:row-start-3">
                     {project.caseStudy.nextSteps.map((item, index) => (
                       <li className="flex items-start gap-3 text-sm leading-6 text-ink-soft" key={item}><span className="grid size-7 shrink-0 place-items-center rounded-full bg-white font-mono text-xs font-extrabold text-blue-dark">{String(index + 1).padStart(2, "0")}</span>{item}</li>

@@ -9,11 +9,11 @@ A multi-page Next.js portfolio template for a freelance full-stack web developer
 - `/projects/[slug]` — individual case studies
 - `/services` — service offers and working process
 - `/about` — profile, skills, and principles
-- `/contact` — contact details and email enquiry form
+- `/contact` — project enquiry guidance with a direct link to the Upwork profile
 
 ## Edit the content
 
-Start with `lib/portfolio-data.ts`. It contains the name, bio, contact details, services, skills, and project case-study templates used throughout the site.
+Start with `lib/portfolio-data.ts`. It contains the name, bio, Upwork profile URL, contact button label, services, skills, and project case-study templates used throughout the site.
 
 The main styles are in `app/globals.css`. Shared sections and navigation live in `components/`.
 
@@ -36,10 +36,10 @@ npm run build
 
 ## Important before publishing
 
-- Replace `YOUR NAME`, initials, email, and profile URLs in `lib/portfolio-data.ts`.
+- Keep the name, initials, and Upwork profile URL in `lib/portfolio-data.ts` current.
 - Replace every demo case study with verified work and outcomes.
 - Keep only tools you can confidently discuss and use.
 - Add real screenshots only when you own them or have permission to use them.
-- Test the email link and all navigation routes.
+- Test the Upwork contact links and all navigation routes.
 
-The contact form does not store visitor data. It prepares a message and opens the visitor's email application.
+Project enquiries go through Upwork. The navigation, homepage, shared contact section, footer, and `/contact` page all link to the same Upwork profile. The site does not display a personal email address or provide an enquiry form. Keep personal contact details and links to external messaging or scheduling tools out of the public portfolio.
